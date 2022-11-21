@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_specifier.c                                 :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 20:36:19 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/21 20:16:21 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/21 19:23:30 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-size_t	ft_get_specifier(t_fields *field, const char *format)
-{
-	size_t	count;
+#include "get_next_line.h"
+#include "libft.h"
+#include "unistd.h"
 
-	count = 0;
-	field -> specifier = format[count];
-	count++;
-	return (count);
-}
+
+#endif

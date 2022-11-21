@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 05:24:32 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/19 21:34:56 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/21 20:34:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ t_fields	ft_init_field(void);
 void		ft_reset_field(t_fields *field);
 
 size_t		ft_printf(const char *format, ...);
+size_t		ft_print(const char *format, va_list args);
+
+void		ft_handle_args(const char *format, \
+						t_fields *field, va_list args);
 
 size_t		ft_get_flags(t_fields *field, const char *format);
 size_t		ft_get_width(t_fields *field, const char *format);
@@ -106,6 +110,7 @@ void		ft_validate_specifier_p(t_fields *field);
 void		ft_validate_specifier_u(t_fields *field);
 void		ft_validate_specifier_x(t_fields *field);
 void		ft_validate_specifier_percent(t_fields *field);
+void		ft_print_str(char *str, size_t size, int fd, t_fields *field);
 
 void		ft_create_precision(t_fields *field);
 void		ft_create_width(t_fields *field);

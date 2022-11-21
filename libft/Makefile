@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 01:17:05 by arobu             #+#    #+#              #
-#    Updated: 2022/11/19 23:19:18 by arobu            ###   ########.fr        #
+#    Updated: 2022/11/21 20:06:49 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ PRINTF_SRCS	=	$(wildcard $(FT_PRINTF_SDIR)/*.c)
 PRINTF_OBJS	= 	$(patsubst $(FT_PRINTF_SDIR)/%.c, $(FT_PRINTF_OBJ)/%.o, $(PRINTF_SRCS))
 
 
-all:	libft printf $(NAME)
+all: libft printf $(NAME)
 
 $(NAME):
 					@echo "$(CYAN) Creating libft library.$(DEF_COLOR)"

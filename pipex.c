@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_specifier.c                                 :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 20:36:19 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/21 20:16:21 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/21 14:56:29 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/21 20:29:10 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "libft/include/libft.h"
+#include "libft/include/ft_printf.h"
 
-size_t	ft_get_specifier(t_fields *field, const char *format)
+int	main(int argc, char* argv[])
 {
-	size_t	count;
+	char *sal;
 
-	count = 0;
-	field -> specifier = format[count];
-	count++;
-	return (count);
+	ft_printf("%s", "salut");
+	return (0);
 }
