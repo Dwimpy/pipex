@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/11/21 20:30:02 by arobu            ###   ########.fr        #
+#    Updated: 2022/11/22 22:05:31 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ WHITE = \033[0;97m
 PIPEX_SRCS	=	$(wildcard $(SRC_DIR)/*.c)
 PIPEX_OBJS	= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(PIPEX_SRCS))
 
-all:	libft	$(NAME)
+all:	$(NAME)
 
 $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)
@@ -73,8 +73,8 @@ show:
 
 fclean:		clean
 			@$(RM) -f $(NAME)
-			@$(RM) -f $(LIBFT_LIB)
 			@echo "$(CYAN)Executables successfully cleaned!$(DEF_COLOR)"
+#			@$(RM) -f $(LIBFT_LIB)
 
 
 re:			fclean all
@@ -82,6 +82,6 @@ re:			fclean all
 bonus: 	$(NAME)  
 
 norm:
-			@norminette $(SRC_DIR) $(INCLUDE) | grep -v ok
+			@norminette $(SRC_DIR) $(INCLUDE) | grep -v OK
 		
 .PHONY:		all libft clean fclean re norm
