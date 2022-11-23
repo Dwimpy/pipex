@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/11/22 22:05:31 by arobu            ###   ########.fr        #
+#    Updated: 2022/11/23 15:39:11 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_DIR			= ./src
 OBJ_DIR			= ./obj
 LIBFT_FOLDER	= ./libft
 LIBFT_LIB		= ./libft/libft.a
-MAIN_FILE		= pipex.c
+MAIN_FILE		= main.c
 # Compiler
 
 CC			= gcc
