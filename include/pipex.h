@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/23 18:06:04 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/23 20:44:27 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ typedef struct s_cmd
 	char	*options;
 }				t_cmd;
 
-char a,b = 0;
-t_cmd *test= (t_cmd){&a, &b};
 typedef struct s_data
 {
 	t_cmd	*s_cmd;
