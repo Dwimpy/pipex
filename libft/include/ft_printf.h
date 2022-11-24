@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 05:24:32 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/21 20:34:08 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/24 15:51:15 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@
 
 # include "libft.h"
 # include <stdarg.h>
-# include <stdint.h>
-# include <stdlib.h>
-# include <unistd.h>
 
 typedef struct s_flags
 {

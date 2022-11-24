@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 16:39:26 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/24 15:19:05 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/24 17:21:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "environment.h"
 
-#include "../libft/include/ft_printf.h"
-#include "cmd.h"
-
-typedef struct s_data
+typedef struct s_file
 {
-	t_cmd	*s_cmd;
-}				t_data;
+	t_environment	env;
+	char			*dir_path;
+	char			*file_name;
+}					t_file;
 
-void	pipex(int argc, char **argv, char **envp);
-
-#endif
+void	file_ctor(t_file *const me, char *dir_path, char *file_name);
+int		file_exists(t_file *const me);

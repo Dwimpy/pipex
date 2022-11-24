@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 16:39:26 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/24 15:59:04 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/24 20:24:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "file.h"
 
-#include "../libft/include/ft_printf.h"
-#include "cmd.h"
-
-typedef struct s_data
+typedef struct s_cmd
 {
-	t_cmd	*s_cmd;
-}				t_data;
+	t_file	file;
+	char	*cmd;
+	char	*options;
+	char	*full_cmd;
+}			t_cmd;
 
-void	pipex(int argc, char **argv, char **envp);
-
-#endif
+void	cmd_ctor(t_cmd **me, int argc, char **argv);

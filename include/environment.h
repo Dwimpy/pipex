@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 16:39:26 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/24 15:17:49 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/24 18:20:33 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 
 #include "../libft/include/ft_printf.h"
-#include "cmd.h"
 
-typedef struct s_data
+typedef struct s_environment
 {
-	t_cmd	*s_cmd;
-}				t_data;
+	char	**envp;
+	char	*bin_path_variable;
+	char	**bin_paths;
+}				t_environment;
 
-void	pipex(int argc, char **argv, char **envp);
+void	env_ctor(t_environment *const me, char **envp);
 
 #endif

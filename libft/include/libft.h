@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:36:02 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/21 20:29:16 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/24 21:07:17 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_atoi(const char *str);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_contains(const char *str, char c);
-
+int		ft_isspace3(char c);
 void	*ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
