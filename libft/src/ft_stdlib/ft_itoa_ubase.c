@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 00:09:11 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/05 17:01:14 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 static int	count_digits(unsigned long n, const char *base)
 {

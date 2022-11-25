@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 05:24:32 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 15:51:15 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:19:43 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define BUFFER_SIZE 5000
 
 # include "libft.h"
-# include <stdarg.h>
 
 typedef struct s_flags
 {

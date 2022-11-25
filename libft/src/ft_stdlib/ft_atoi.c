@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:32:05 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 21:11:32 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_atoi(const char *s)
 {

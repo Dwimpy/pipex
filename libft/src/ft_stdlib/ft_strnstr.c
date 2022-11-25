@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 18:24:38 by arobu             #+#    #+#             */
-/*   Updated: 2022/10/20 01:58:41 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

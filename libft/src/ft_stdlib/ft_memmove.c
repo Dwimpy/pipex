@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 14:32:41 by arobu             #+#    #+#             */
-/*   Updated: 2022/10/20 01:58:16 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:20:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 void	*ft_memmove(void *dst, void *src, size_t len)
 {

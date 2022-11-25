@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:36:02 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 21:07:17 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:19:47 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdint.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {	

@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:17:24 by arobu             #+#    #+#             */
-/*   Updated: 2022/10/15 20:56:49 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 19:18:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_isalpha(int c)
 {

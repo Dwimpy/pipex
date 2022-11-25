@@ -6,18 +6,15 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:59:04 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 20:24:53 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 20:19:59 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "file.h"
+#ifndef CMD_H
+# define CMD_H
 
-typedef struct s_cmd
-{
-	t_file	file;
-	char	*cmd;
-	char	*options;
-	char	*full_cmd;
-}			t_cmd;
+# include "file.h"
 
-void	cmd_ctor(t_cmd **me, int argc, char **argv);
+void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv);
+
+#endif

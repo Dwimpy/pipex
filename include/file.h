@@ -6,18 +6,17 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:19:05 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/24 17:21:22 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/25 20:55:00 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "environment.h"
+#ifndef FILE_H
+# define FILE_H
 
-typedef struct s_file
-{
-	t_environment	env;
-	char			*dir_path;
-	char			*file_name;
-}					t_file;
+# include "environment.h"
+# include <stdio.h>
 
-void	file_ctor(t_file *const me, char *dir_path, char *file_name);
-int		file_exists(t_file *const me);
+void	file_cmd_path( t_cmd *cmd, t_environment env, int command_count);
+void	cmd_file_exists(t_cmd *cmd, t_environment env);
+
+#endif
