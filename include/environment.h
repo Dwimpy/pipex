@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:17:49 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/25 21:09:17 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/27 20:29:44 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ typedef struct s_file_vtable
 	void	(*get_cmd_path)();
 }				t_file_vtable;
 
-typedef struct s_file
+typedef struct s_path
 {
 	t_environment	env;
-	t_file_vtable	file_vtable;
 	char			*dir_path;
 	char			*file_name;
 	char			*full_path;
-}					t_file;
+}					t_path;
 
 typedef struct s_cmd
 {
-	t_file	file;
+	t_path	path;
 	char	*cmd;
 	char	*options;
 	char	*full_cmd;
+	char	**exec_options;
 }			t_cmd;
 
 void	env_ctor(t_environment *const me, char **envp);

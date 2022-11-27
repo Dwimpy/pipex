@@ -5,18 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 15:19:05 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/25 20:55:00 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/27 14:00:47 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/27 20:21:07 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILE_H
 # define FILE_H
 
-# include "environment.h"
-# include <stdio.h>
+#include <fcntl.h>
+# include "../libft/include/ft_printf.h"
+# include <errno.h>
+# include <string.h>
 
-void	file_cmd_path( t_cmd *cmd, t_environment env, int command_count);
-void	cmd_file_exists(t_cmd *cmd, t_environment env);
+
+typedef struct s_file
+{
+	char	*file_name;
+}				t_file;
+
+int	open_input_file(t_file file);
 
 #endif

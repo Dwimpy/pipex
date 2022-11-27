@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/27 21:20:15 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/24 15:19:05 by arobu             #+#    #+#             */
+/*   Updated: 2022/11/27 20:29:41 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PATH_H
+# define PATH_H
 
-#include "../libft/include/ft_printf.h"
-#include "pipeline.h"
-#include "cmd.h"
+# include "environment.h"
+# include <stdio.h>
 
-void	pipex(int argc, char **argv, char **envp);
+void	file_cmd_path(t_cmd *cmd, t_environment env, int command_count);
+void	cmd_file_exists(t_cmd *cmd, t_environment env);
 
 #endif
