@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 01:22:48 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/21 20:16:21 by arobu            ###   ########.fr       */
+/*   Updated: 2022/11/30 01:51:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ size_t	ft_count_udigits(uintmax_t n, char *base)
 	radix = ft_strlen(base);
 	if (n == 0)
 		return (1);
-	if (n < 0)
-		n *= -1;
 	while (n > 0)
 	{
 		n /= radix;

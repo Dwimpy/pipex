@@ -6,104 +6,146 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 17:48:11 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/27 21:19:43 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/01 17:21:35 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/include/libft.h"
+#include "../include/pipex_split.h"
 
-static int	ft_word_count(char *str, char sep)
+void	get_word_stack_empty(t_word **words, \
+							t_arguments *args, t_stack **stack);
+void	get_word_stack_not_empty(t_word **words, \
+								t_arguments *args, t_stack **stack);
+void	init_args(t_arguments *args, char *to_split, char delimiter);
+
+void	create_words(t_words *words, char *to_split, char delimiter)
 {
-	int	word_count;
+	int			word_counter;
+	t_arguments	args;
+	t_stack		*stack;
+	t_word		*words_ptr;
 
-	word_count = 0;
-	if (!*str)
-		return (0);
-	if (*str++ != sep)
-		word_count++;
-	while (*str != '\0')
+	words_ptr = (*words).words;
+	word_counter = (*words).word_count;
+	(*words).words = words_ptr;
+	init_args(&args, to_split, delimiter);
+	stack = create_stack(2);
+	while (*(args.trimmed_str_ptr) != '\0')
 	{
-		if (*str == 39)
+		get_word_stack_empty(&words_ptr, &args, &stack);
+		get_word_stack_not_empty(&words_ptr, &args, &stack);
+		(args.trimmed_str_ptr)++;
+	}
+	(*words).words[word_counter].word = NULL;
+	while (--word_counter >= 0)
+		(*words).words[word_counter].word = ft_substr(args.trimmed_str, \
+		(*words).words[word_counter].word_begins, \
+		(*words).words[word_counter].word_ends - \
+		(*words).words[word_counter].word_begins + 1);
+	free_stack(stack);
+	free(args.trimmed_str);
+}
+
+void	init_args(t_arguments *args, char *to_split, char delimiter)
+{
+	args->trimmed_str = ft_strtrim_char(to_split, delimiter);
+	args->trimmed_str_ptr = args->trimmed_str;
+	args->delimiter = delimiter;
+	args->word_begin = 1;
+	args->word_end = 0;	
+}
+
+void	get_word_stack_empty(t_word **words, t_arguments *args, t_stack **stack)
+{
+	if (isempty(*stack))
+	{
+		if (*(*args).trimmed_str_ptr == 39)
+			push(*stack, 39);
+		if ((*args).word_begin == 1 && \
+			*(*args).trimmed_str_ptr != (*args).delimiter)
 		{
-			str++;
-			while (*str != 39)
-				str++;
+			args->word_begin = 0;
+			(**words).word_begins = \
+			(*args).trimmed_str_ptr - (*args).trimmed_str;
 		}
-		if (*str != sep && *(str - 1) == sep)
-			word_count++;
-		str++;
+		if (*(args -> trimmed_str_ptr) != args -> delimiter && \
+		*(args ->trimmed_str_ptr + 1) == args -> delimiter || \
+		*(args->trimmed_str_ptr + 1) == '\0')
+			args -> word_end = 1;
+		if (args -> word_end == 1)
+		{
+			args -> word_begin = 1;
+			args -> word_end = 0;
+			(**words).word_ends = ((*args).trimmed_str_ptr - args->trimmed_str);
+			(*words)++;
+		}
 	}
-	return (word_count);
 }
 
-static char	**ft_allocatememeory(char *str, char sep, int *wn, int *str_index)
+void	get_word_stack_not_empty(t_word **words, \
+								t_arguments *args, t_stack **stack)
 {
-	char	**words;
-	int		word_count;
-
-	*wn = -1;
-	*str_index = 0;
-	word_count = ft_word_count(str, sep);
-	words = malloc(sizeof(*words) * (word_count + 1));
-	if (!words)
-		return (0);
-	return (words);
-}
-
-static int	ft_next_word(char *str, char sep, int index)
-{
-	int		word_len;
-
-	word_len = 0;
-	while (*(str + index) == sep && *(str + index) != '\0')
-		index++;
-	while (*(str + index) != sep && *(str + index) != '\0')
+	if (!isempty(*stack))
 	{
-		word_len++;
-		index++;
+		if (args -> word_begin && *(*args).trimmed_str_ptr == 39)
+		{
+			args -> word_begin = 0;
+			(**words).word_begins = \
+			(*args).trimmed_str_ptr - (*args).trimmed_str;
+		}
+		if (*(args -> trimmed_str_ptr) == 39 && \
+		*(args ->trimmed_str_ptr + 1) == args -> delimiter || \
+		*(args->trimmed_str_ptr + 1) == '\0')
+			args -> word_end = 1;
+		if (args -> word_end == 1)
+		{
+			args -> word_begin = 1;
+			args -> word_end = 0;
+			pop(*stack);
+			(**words).word_ends = ((*args).trimmed_str_ptr - args->trimmed_str);
+			(*words)++;
+		}
 	}
-	return (word_len);
 }
 
-static char	**ft_free(char	**words, int index)
+void	populate_fields(char ***split_words, t_words words, int word_counter)
 {
-	int	j;
+	int i;
 
-	j = 0;
-	while (j < index && words[j] != 0)
+	i = -1;
+	while(++i < word_counter)
 	{
-		free(words[j]);
-		j++;
+		(*split_words)[i] = ft_strdup(words.words[i].word);
+		if (!(*split_words)[i])
+		{
+			free_words_split(*split_words);
+			(*split_words) = NULL;
+			return ;
+		}
 	}
-	free(words);
-	return (0);
 }
 
-char	**pipex_split(const char *str, char sep)
+char	**pipex_split(char	*to_split, char delimiter)
 {
-	char	**words;
-	int		wn;
-	int		char_index;
-	int		str_index;
-
-	if (!str)
+	t_words	words;
+	char	**split_words;
+	int		word_counter;
+	int		i;
+	
+	if (!to_split)
 		return (NULL);
-	words = ft_allocatememeory((char *)str, sep, &wn, &str_index);
-	if (!words)
+	words = word_count(to_split, delimiter);
+	word_counter = words.word_count;
+	words.words = (t_word *)malloc(sizeof(t_word) * (words.word_count + 1));
+	if (!words.words)
 		return (NULL);
-	while (++wn < ft_word_count((char *)str, sep))
-	{
-		char_index = 0;
-		words[wn] = \
-		malloc(ft_next_word((char *)str, sep, str_index) + 1);
-		if (!words[wn])
-			return (ft_free(words, wn));
-		while (str[str_index] != '\0' && str[str_index] == sep)
-			str_index++;
-		while (str[str_index] != '\0' && str[str_index] != sep)
-			words[wn][char_index++] = str[str_index++];
-		words[wn][char_index] = '\0';
-	}
-	words[wn] = 0;
-	return (words);
+	split_words = (char **)malloc(sizeof(char *) * (word_counter + 1));
+	if (!split_words)
+		return (NULL);
+	split_words[word_counter] = 0;
+	i = -1;
+	create_words(&words, to_split, delimiter);
+	populate_fields(&split_words, words, word_counter);
+	free_words(&words);
+	return (split_words);
 }

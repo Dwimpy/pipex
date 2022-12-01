@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_stack.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:01:26 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 03:59:29 by arobu            ###   ########.fr       */
+/*   Created: 2022/11/30 13:15:03 by arobu             #+#    #+#             */
+/*   Updated: 2022/12/01 04:00:23 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_STACK_H
 
+# define PIPEX_STACK_H
+
+# include <stdlib.h>
 # include "../libft/include/ft_printf.h"
-# include "pipeline.h"
-# include "cmd.h"
 
-void	pipex(int argc, char **argv, char **envp);
+typedef struct s_stack
+{
+	int				top;
+	unsigned int	max_size;
+	int				*items;
+}				t_stack;
+
+t_stack	*create_stack(unsigned int capacity);
+
+int		isfull(t_stack *stack);
+int		isempty(t_stack *stack);
+int		size(t_stack *stack);
+int		pop(t_stack *stack);
+int		peek(t_stack *stack);
+void	push(t_stack *stack, int data);
+void	free_stack(t_stack *stack);
 
 #endif

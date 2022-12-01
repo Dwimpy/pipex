@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/11/27 19:33:31 by arobu            ###   ########.fr        #
+#    Updated: 2022/12/01 02:26:51 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@ echo "$(MAGENTA)Compiling file $<.$(DEF_COLOR)"
-	@ $(CC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -c $< -o $@ 
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
