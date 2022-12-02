@@ -6,16 +6,17 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:59:06 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 04:07:06 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/01 21:15:14 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cmd.h"
+#include "../include/pipex_split.h"
 
 static void		create_commands(t_cmd ***me, char **argv, int command_count);
 static void		get_command(t_cmd ***cmd, int command_count);
 static void		get_options(t_cmd ***cmd, int command_count);
-static void		format_options(t_cmd ***cmd);
+static void format_options(t_cmd ***cmd, int command_count);
 
 void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv)
 {
@@ -27,7 +28,7 @@ void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv)
 	get_command(&me, command_count);
 	get_options(&me, command_count);
 	file_cmd_path(*me, env, command_count);
-	// format_options(&me);
+	format_options(&me, command_count);
 }
 
 static void	create_commands(t_cmd ***me, char **argv, int command_count)
@@ -80,21 +81,16 @@ static void	get_options(t_cmd ***cmd, int command_count)
 	}
 }
 
-// static void format_options(t_cmd ***cmd)
-// {
-// 	int		i;
-// 	int		opt_count;
-// 	char	**cmd_opts;
+static void format_options(t_cmd ***cmd, int command_count)
+{
+	int		i;
+	int		opt_count;
 
-// 	i = -1;
-// 	opt_count = 0;
-// 	cmd_opts = pipex_split((**cmd)->options, ' ');
-// 	while (cmd_opts[opt_count] != NULL)
-// 		opt_count++;
-// 	(**cmd)->exec_options = malloc(sizeof(char *) * (opt_count + 2));
-// 	while (++i < opt_count)
-// 	{
-// 		(**cmd)->exec_options[0] = (**cmd)->path.full_path;
-// 		(**cmd)->exec_options[i + 1] = ft_strdup(cmd_opts[i]);
-// 	}
-// }
+	i = -1;
+	while(++i < command_count)
+	{
+		(**cmd)[i].exec_options = pipex_split((**cmd)[i].full_cmd, ' ');
+		free((**cmd)[i].exec_options[0]);
+		(**cmd)[i].exec_options[0] = (**cmd)[i].path.full_path;
+	}
+}

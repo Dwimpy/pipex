@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/12/01 02:26:51 by arobu            ###   ########.fr        #
+#    Updated: 2022/12/01 18:08:12 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ WHITE = \033[0;97m
 PIPEX_SRCS	=	$(wildcard $(SRC_DIR)/*.c)
 PIPEX_OBJS	= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(PIPEX_SRCS))
 
-all:	$(NAME)
+all:	 $(NAME)
 
 $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)

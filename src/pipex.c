@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:38:54 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 17:23:23 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/02 16:58:34 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,37 @@ void	pipex(int argc, char **argv, char **envp)
 {
 	t_cmd 			*cmd;
 	t_environment	env;
-	t_pipeline		pipe;
-	
+	t_pipeline		pipeline;
+	int				i;
+	int stdout;
+	int buffer[1024];
+	i = 0;	
 	env_ctor(&env, envp);
 	cmd_ctor(&cmd, env, argc, argv);
-	pipeline_ctor(&pipe, cmd, argc, argv);
+	pipeline_ctor(&pipeline, cmd, argc, argv);
+	// int fdd;
+	// fdd = open("file2", O_WRONLY);
 
-	
+	// dup2(pipeline.file_fd_input, STDIN_FILENO);
+	// close(fdd);
+	// char	*binaryPath = "/bin/cat";
+	// char	*test[] = {binaryPath, "-e", NULL};
+	// execve("/bin/cat", test, NULL);
 	// ft_printf("Full_cmd 0:%s\n", cmd[0].full_cmd);
 	// ft_printf("Full_cmd 1:%s\n", cmd[1].full_cmd);
-	// ft_printf("Cmd 1:%s\n", cmd[0].exec_options[0]);
+	// while (cmd[1].exec_options[i] != NULL)
+	// {
+	//  	ft_printf("Cmd 1:%s\n", cmd[1].exec_options[i]);
+	// 	i++;
+	// }
+
+	// dup2(stdout, STDOUT_FILENO);
+	// ft_printf("%s", buffer);
 	// ft_printf("Cmd bin 0:%s\n", cmd[0].path.full_path);
 	// ft_printf("Cmd bin 1:%s\n", cmd[1].path.full_path);
 	// ft_printf("Pipe input file: %s\n", pipe.input.file_name);
 	// ft_printf("Pipe output file: %s\n", pipe.output.file_name);
-
+	
 
 
 }

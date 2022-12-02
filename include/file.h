@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 14:00:47 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 04:00:39 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/02 15:06:03 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct s_file
 }				t_file;
 
 int	open_input_file(t_file file);
+int	open_output_file(t_file file);
 
 #endif

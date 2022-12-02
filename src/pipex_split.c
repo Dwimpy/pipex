@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 17:48:11 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 17:21:35 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/02 19:13:49 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	get_word_stack_not_empty(t_word **words, \
 {
 	if (!isempty(*stack))
 	{
-		if (args -> word_begin && *(*args).trimmed_str_ptr == 39)
+		if (args -> word_begin && *(*args).trimmed_str_ptr - 1 == 39)
 		{
 			args -> word_begin = 0;
 			(**words).word_begins = \
