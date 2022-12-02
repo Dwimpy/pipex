@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 17:48:11 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 19:13:49 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/02 23:00:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,6 @@ void	create_words(t_words *words, char *to_split, char delimiter)
 		(*words).words[word_counter].word_begins + 1);
 	free_stack(stack);
 	free(args.trimmed_str);
-}
-
-void	init_args(t_arguments *args, char *to_split, char delimiter)
-{
-	args->trimmed_str = ft_strtrim_char(to_split, delimiter);
-	args->trimmed_str_ptr = args->trimmed_str;
-	args->delimiter = delimiter;
-	args->word_begin = 1;
-	args->word_end = 0;	
 }
 
 void	get_word_stack_empty(t_word **words, t_arguments *args, t_stack **stack)
@@ -110,10 +101,10 @@ void	get_word_stack_not_empty(t_word **words, \
 
 void	populate_fields(char ***split_words, t_words words, int word_counter)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(++i < word_counter)
+	while (++i < word_counter)
 	{
 		(*split_words)[i] = ft_strdup(words.words[i].word);
 		if (!(*split_words)[i])
@@ -131,7 +122,7 @@ char	**pipex_split(char	*to_split, char delimiter)
 	char	**split_words;
 	int		word_counter;
 	int		i;
-	
+
 	if (!to_split)
 		return (NULL);
 	words = word_count(to_split, delimiter);

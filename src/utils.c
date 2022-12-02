@@ -1,40 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_split_free.c                                 :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 16:58:47 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 22:58:13 by arobu            ###   ########.fr       */
+/*   Created: 2022/12/02 23:04:05 by arobu             #+#    #+#             */
+/*   Updated: 2022/12/02 23:04:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_split.h"
+#include "../include/pipeline.h"
+#include <stdio.h>
 
-void	free_words(t_words *words)
-{
-	int	i;
-
-	i = 0;
-	while (i < words->word_count && (*words).words[i].word != NULL)
-	{
-		free((*words).words[i].word);
-		i++;
-	}
-	free((*words).words);
-}
-
-void	free_words_split(char **split_str)
-{
-	int	i;
-
-	i = 0;
-	while (split_str[i] != NULL)
-	{
-		free(split_str[i]);
-		i++;
-	}
-	free(split_str);
-	split_str = NULL;
-}

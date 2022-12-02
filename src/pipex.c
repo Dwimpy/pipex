@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:38:54 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 16:58:34 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/02 22:57:04 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 
 void	pipex(int argc, char **argv, char **envp)
 {
-	t_cmd 			*cmd;
+	t_cmd			*cmd;
 	t_environment	env;
 	t_pipeline		pipeline;
 	int				i;
-	int stdout;
-	int buffer[1024];
-	i = 0;	
+
+	i = 0;
 	env_ctor(&env, envp);
 	cmd_ctor(&cmd, env, argc, argv);
 	pipeline_ctor(&pipeline, cmd, argc, argv);
+}
+
 	// int fdd;
 	// fdd = open("file2", O_WRONLY);
 
@@ -47,7 +48,3 @@ void	pipex(int argc, char **argv, char **envp)
 	// ft_printf("Cmd bin 1:%s\n", cmd[1].path.full_path);
 	// ft_printf("Pipe input file: %s\n", pipe.input.file_name);
 	// ft_printf("Pipe output file: %s\n", pipe.output.file_name);
-	
-
-
-}
