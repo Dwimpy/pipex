@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:21:17 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 04:02:03 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 18:53:07 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	file_cmd_path( t_cmd *cmd, t_environment env, int command_count)
 	if (!strncmp(cmd->cmd, "\0", 1))
 	{
 		ft_printf("Program exited. Empty command arguments");
-		exit(-1);
+		exit(1);
 	}
 	get_cmd_bin_path(cmd, env, command_count);
 }
@@ -34,6 +34,7 @@ void	cmd_file_exists(t_cmd *cmd, t_environment env)
 
 	i = 0;
 	file_cmd_path = ft_strjoin("/", cmd->cmd);
+	(*cmd).path.full_path = NULL;
 	while ((env.bin_paths[i]) != NULL)
 	{
 		full_path = ft_strjoin((env.bin_paths[i]), file_cmd_path);
@@ -62,9 +63,9 @@ void	get_cmd_bin_path(t_cmd *cmd, t_environment env, int command_count)
 		cmd_file_exists(&cmd[i], env);
 		if (cmd[i].path.full_path == NULL)
 		{	
-			ft_printf("Command does not exist: %s\nProgram exited with \
-			error code %d: %s", cmd[i].cmd, errno, strerror(errno));
-			exit(-1);
+			ft_printf("Command not found: %s \
+%d: %s", cmd[i].cmd, errno, strerror(errno));
+			exit(errno);
 		}
 	}
 }

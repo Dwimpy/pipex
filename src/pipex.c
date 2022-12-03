@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:38:54 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/03 16:41:31 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 18:46:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	pipex(int argc, char **argv, char **envp)
 	t_environment	env;
 	t_pipeline		pipeline;
 
-	env_ctor(&env, envp);
+	env_ctor(&env, envp, argc, argv);
 	cmd_ctor(&cmd, env, argc, argv);
-	pipeline_ctor(&pipeline, cmd, argc, argv);
+	pipeline_ctor(&pipeline, cmd, &env);
 	free_memory(cmd, &env, &pipeline);
 
 

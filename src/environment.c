@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:17:49 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 04:00:58 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 18:43:58 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 static void	get_path_variable(t_environment *const me);
 static void	extract_paths(t_environment *const env);
 
-void	env_ctor(t_environment *const me, char **envp)
+void	env_ctor(t_environment *const me, char **envp, int argc, char **argv)
 {
 	me -> envp = envp;
+	me -> argc = argc;
+	me -> argv = argv;
 	get_path_variable(me);
 	extract_paths(me);
 }

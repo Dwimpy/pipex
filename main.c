@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:56:29 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 13:58:42 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 18:05:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	main(int argc, char *argv[], char *envp[])
 	if (argc < 5)
 	{
 		ft_printf("%s", "Too few arguments, usage ./pipex file1 cmd cmd file2");
-	 return (0);
+	 	exit(1);
 	}
-
+	if (!envp || envp[0][0] == '\0')
+		exit(1);
 	
 	pipex(argc, argv, envp);
 
