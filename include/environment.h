@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:17:49 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/27 20:29:44 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 15:35:51 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_path
 typedef struct s_cmd
 {
 	t_path	path;
+	int		command_count;
 	char	*cmd;
 	char	*options;
 	char	*full_cmd;

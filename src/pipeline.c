@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 13:48:40 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 23:03:16 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 16:47:06 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 void	add_files_to_pipeline(t_pipeline *const me, char *input, char *output);
-void	create_pipes(t_pipe **pipe, int command_count);
+void	create_pipes(t_pipeline **pipes, int command_count);
 void	redirect_io(int input, int output);
 void	pipeline_redirection(t_pipeline ***pipeline, int command_count);
 void	run_cmds(t_pipeline **pipeline, t_cmd *cmd, int command_count);
@@ -22,21 +22,16 @@ void	run_cmds(t_pipeline **pipeline, t_cmd *cmd, int command_count);
 void	pipeline_ctor(t_pipeline *me, t_cmd *cmd, int argc, char **argv)
 {
 	int		command_count;
-	int		i;
 
 	command_count = argc - 3;
 	me->child = -1;
-	i = -1;
 	me->input.file_name = ft_strdup(argv[1]);
 	me->output.file_name = ft_strdup(argv[argc - 1]);
 	me->file_fd_input = open_input_file(me->input);
 	me->file_fd_output = open_output_file(me->output);
-	create_pipes(&me->pipe, command_count);
-	while (me->child < command_count)
-	{
+	create_pipes(&me, command_count);
+	while (me->child <= command_count)
 		run_cmds(&me, cmd, command_count);
-		i++;
-	}
 }
 
 void	redirect_io(int input, int output)
@@ -68,22 +63,22 @@ void	pipeline_redirection(t_pipeline ***pipeline, int command_count)
 					(**pipeline)->pipe[(**pipeline)->child].fd[WRITE_PIPE]);
 }
 
-void	create_pipes(t_pipe **pipes, int command_count)
+void	create_pipes(t_pipeline **pipes, int command_count)
 {
 	int	i;
 
 	i = -1;
-	*pipes = (t_pipe *)malloc(sizeof(t_pipe) * command_count);
-	if (!(*pipes))
+	(*pipes)->pipe = (t_pipe *)malloc(sizeof(t_pipe) * (command_count));
+	if (!(*pipes)->pipe)
 	{
-		(*pipes) = NULL;
+		(*pipes)->pipe = NULL;
 		perror("Pipe malloc allocaiton failed");
 		exit(1);
 		return ;
 	}
 	while (++i < command_count)
 	{
-		pipe((*pipes)[i].fd);
+		pipe((*pipes)->pipe[i].fd);
 	}
 }
 
@@ -103,10 +98,9 @@ void	close_pipe_fds(t_pipeline ***pipeline, int command_count)
 
 void	run_cmds(t_pipeline **pipeline, t_cmd *cmd, int command_count)
 {
-	(**pipeline).child++;
-	(*pipeline)->pipe[(*pipeline)->child].pid = fork();
-	if ((*pipeline)->pipe[(*pipeline)->child].pid == 0 && \
-		(**pipeline).child < command_count)
+	 (**pipeline).child++;
+	(*pipeline)->pid = fork();
+	if ((*pipeline)->pid == 0 && (**pipeline).child < command_count)
 	{
 		pipeline_redirection(&pipeline, command_count);
 		close_pipe_fds(&pipeline, command_count);

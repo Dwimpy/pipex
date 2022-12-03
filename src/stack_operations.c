@@ -6,13 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:21:22 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 19:45:16 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 16:15:56 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_stack.h"
 
-t_stack	*create_stack(unsigned int capacity)
+t_stack	*create_stack(int capacity)
 {
 	t_stack	*stack;
 

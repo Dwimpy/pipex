@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 17:48:11 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 23:00:08 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 16:16:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	create_words(t_words *words, char *to_split, char delimiter)
 	(*words).words = words_ptr;
 	init_args(&args, to_split, delimiter);
 	stack = create_stack(2);
-	while (*(args.trimmed_str_ptr) != '\0')
+	while (*(args.trim_ptr) != '\0')
 	{
 		get_word_stack_empty(&words_ptr, &args, &stack);
 		get_word_stack_not_empty(&words_ptr, &args, &stack);
-		(args.trimmed_str_ptr)++;
+		(args.trim_ptr)++;
 	}
 	(*words).words[word_counter].word = NULL;
 	while (--word_counter >= 0)
@@ -50,24 +50,26 @@ void	get_word_stack_empty(t_word **words, t_arguments *args, t_stack **stack)
 {
 	if (isempty(*stack))
 	{
-		if (*(*args).trimmed_str_ptr == 39)
+		if (*(*args).trim_ptr == 39)
+		{
 			push(*stack, 39);
+			return ;
+		}
 		if ((*args).word_begin == 1 && \
-			*(*args).trimmed_str_ptr != (*args).delimiter)
+			*(*args).trim_ptr != (*args).delimiter)
 		{
 			args->word_begin = 0;
 			(**words).word_begins = \
-			(*args).trimmed_str_ptr - (*args).trimmed_str;
+			(*args).trim_ptr - (*args).trimmed_str;
 		}
-		if (*(args -> trimmed_str_ptr) != args -> delimiter && \
-		*(args ->trimmed_str_ptr + 1) == args -> delimiter || \
-		*(args->trimmed_str_ptr + 1) == '\0')
+		if (*(args->trim_ptr) != args->delimiter && (*(args->trim_ptr + 1) \
+		== args->delimiter || *(args->trim_ptr + 1) == '\0'))
 			args -> word_end = 1;
 		if (args -> word_end == 1)
 		{
 			args -> word_begin = 1;
 			args -> word_end = 0;
-			(**words).word_ends = ((*args).trimmed_str_ptr - args->trimmed_str);
+			(**words).word_ends = ((*args).trim_ptr - args->trimmed_str);
 			(*words)++;
 		}
 	}
@@ -78,22 +80,23 @@ void	get_word_stack_not_empty(t_word **words, \
 {
 	if (!isempty(*stack))
 	{
-		if (args -> word_begin && *(*args).trimmed_str_ptr - 1 == 39)
+		if (args -> word_begin && *(*args).trim_ptr == 39)
 		{
 			args -> word_begin = 0;
 			(**words).word_begins = \
-			(*args).trimmed_str_ptr - (*args).trimmed_str;
+			(*args).trim_ptr - (*args).trimmed_str + 1;
 		}
-		if (*(args -> trimmed_str_ptr) == 39 && \
-		*(args ->trimmed_str_ptr + 1) == args -> delimiter || \
-		*(args->trimmed_str_ptr + 1) == '\0')
+		if (*(args -> trim_ptr) == 39 && \
+		(*(args ->trim_ptr + 1) == args -> delimiter || \
+		*(args->trim_ptr + 1) == '\0'))
 			args -> word_end = 1;
 		if (args -> word_end == 1)
 		{
 			args -> word_begin = 1;
 			args -> word_end = 0;
 			pop(*stack);
-			(**words).word_ends = ((*args).trimmed_str_ptr - args->trimmed_str);
+			(**words).word_ends = ((*args).trim_ptr - \
+									args->trimmed_str) - 1;
 			(*words)++;
 		}
 	}
@@ -121,7 +124,6 @@ char	**pipex_split(char	*to_split, char delimiter)
 	t_words	words;
 	char	**split_words;
 	int		word_counter;
-	int		i;
 
 	if (!to_split)
 		return (NULL);
@@ -134,7 +136,6 @@ char	**pipex_split(char	*to_split, char delimiter)
 	if (!split_words)
 		return (NULL);
 	split_words[word_counter] = 0;
-	i = -1;
 	create_words(&words, to_split, delimiter);
 	populate_fields(&split_words, words, word_counter);
 	free_words(&words);

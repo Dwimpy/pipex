@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:15:03 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 04:00:23 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 16:15:46 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 typedef struct s_stack
 {
-	int				top;
-	unsigned int	max_size;
-	int				*items;
+	int			top;
+	int			max_size;
+	int			*items;
 }				t_stack;
 
-t_stack	*create_stack(unsigned int capacity);
+t_stack	*create_stack(int capacity);
 
 int		isfull(t_stack *stack);
 int		isempty(t_stack *stack);

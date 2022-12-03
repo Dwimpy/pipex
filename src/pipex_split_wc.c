@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:20:53 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/02 22:59:34 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 03:13:27 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	stack_not_empty_wc(t_stack **stack, char **str, \
 void	init_args(t_arguments *args, char *to_split, char delimiter)
 {
 	args->trimmed_str = ft_strtrim_char(to_split, delimiter);
-	args->trimmed_str_ptr = args->trimmed_str;
+	args->trim_ptr = args->trimmed_str;
 	args->delimiter = delimiter;
 	args->word_begin = 1;
 	args->word_end = 0;

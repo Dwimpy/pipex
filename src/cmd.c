@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:59:06 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/01 21:15:14 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/03 16:17:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@ static void format_options(t_cmd ***cmd, int command_count);
 
 void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv)
 {
-	int		command_count;
 
-	command_count = argc - 3;
-	*me = malloc(sizeof(t_cmd) * command_count);
-	create_commands(&me, argv, command_count);
-	get_command(&me, command_count);
-	get_options(&me, command_count);
-	file_cmd_path(*me, env, command_count);
-	format_options(&me, command_count);
+	*me = malloc(sizeof(t_cmd) * (argc - 3));
+	(*me)->command_count = (argc - 3);
+	create_commands(&me, argv, (*me)->command_count);
+	get_command(&me, (*me)->command_count);
+	get_options(&me, (*me)->command_count);
+	file_cmd_path(*me, env, (*me)->command_count);
+	format_options(&me, (*me)->command_count);
 }
 
 static void	create_commands(t_cmd ***me, char **argv, int command_count)
@@ -42,22 +41,20 @@ static void	create_commands(t_cmd ***me, char **argv, int command_count)
 
 static void	get_command(t_cmd ***cmd, int command_count)
 {
-	int		i;
 	int		j;
 	int		cmd_len;
 	char	*str;
 
-	i = 0;
 	j = -1;
 	cmd_len = 0;
 	while (++j < command_count)
 	{
-		i = 0;
 		cmd_len = 0;
 		str = ft_strtrim((**cmd)[j].full_cmd, "\r\v\f\t ");
 		while (str[cmd_len] != '\0' && !ft_isspace3(str[cmd_len]))
 			++cmd_len;
 		(**cmd)[j].cmd = ft_substr(str, 0, cmd_len);
+		free(str);
 	}
 }
 
@@ -84,13 +81,12 @@ static void	get_options(t_cmd ***cmd, int command_count)
 static void format_options(t_cmd ***cmd, int command_count)
 {
 	int		i;
-	int		opt_count;
-
+	
 	i = -1;
 	while(++i < command_count)
 	{
 		(**cmd)[i].exec_options = pipex_split((**cmd)[i].full_cmd, ' ');
 		free((**cmd)[i].exec_options[0]);
-		(**cmd)[i].exec_options[0] = (**cmd)[i].path.full_path;
+		(**cmd)[i].exec_options[0] = ft_strdup((**cmd)[i].path.full_path);
 	}
 }
