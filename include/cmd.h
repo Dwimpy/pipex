@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:59:04 by arobu             #+#    #+#             */
-/*   Updated: 2022/11/30 14:17:04 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/05 00:14:34 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "path.h"
 
-void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv);
+void	cmd_ctor(t_cmd **me, t_environment env, int argc);
 
 #endif

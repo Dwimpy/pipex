@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/12/03 16:47:31 by arobu            ###   ########.fr        #
+#    Updated: 2022/12/05 15:26:02 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MAIN_FILE		= main.c
 # Compiler
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -fsanitize=address -g3
+CFLAGS		= -Wall -Werror -Wextra #-fsanitize=address -g3
 LDLFLAGS	= -L./libft/ -lft
 
 #Archive and Remove
@@ -46,7 +46,7 @@ WHITE = \033[0;97m
 PIPEX_SRCS	=	$(wildcard $(SRC_DIR)/*.c)
 PIPEX_OBJS	= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(PIPEX_SRCS))
 
-all:	 $(NAME)
+all:   $(NAME)
 
 $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)
@@ -79,7 +79,7 @@ fclean:		clean
 
 re:			fclean all
 
-bonus: 	$(NAME)  
+bonus: 	$(NAME)
 
 norm:
 			@norminette $(SRC_DIR) $(INCLUDE) | grep -v OK

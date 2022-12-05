@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:17:49 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/03 18:47:10 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/04 22:15:24 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_environment
 	char	**envp;
 	int		argc;
 	char	**argv;
+	int		here_doc;
+	char	*break_kw;
 	char	*bin_path_variable;
 	char	**bin_paths;
 }				t_environment;
@@ -43,10 +45,12 @@ typedef struct s_cmd
 {
 	t_path	path;
 	int		command_count;
+	int		cmd_exists;
 	char	*cmd;
 	char	*options;
 	char	*full_cmd;
 	char	**exec_options;
+
 }			t_cmd;
 
 void	env_ctor(t_environment *const me, char **envp, int argc, char **argv);

@@ -6,37 +6,36 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:59:06 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/03 16:17:08 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/05 14:49:31 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cmd.h"
 #include "../include/pipex_split.h"
 
-static void		create_commands(t_cmd ***me, char **argv, int command_count);
-static void		get_command(t_cmd ***cmd, int command_count);
-static void		get_options(t_cmd ***cmd, int command_count);
-static void format_options(t_cmd ***cmd, int command_count);
+static void	create_commands(t_cmd ***me, t_environment env, int command_count);
+static void	get_command(t_cmd ***cmd, int command_count);
+static void	get_options(t_cmd ***cmd, int command_count);
+static void	format_options(t_cmd ***cmd, int command_count);
 
-void	cmd_ctor(t_cmd **me, t_environment env, int argc, char **argv)
+void	cmd_ctor(t_cmd **me, t_environment env, int argc)
 {
-
-	*me = malloc(sizeof(t_cmd) * (argc - 3));
-	(*me)->command_count = (argc - 3);
-	create_commands(&me, argv, (*me)->command_count);
+	*me = malloc(sizeof(t_cmd) * (argc - env.here_doc - 3));
+	(*me)->command_count = (argc - env.here_doc - 3);
+	create_commands(&me, env, (*me)->command_count);
 	get_command(&me, (*me)->command_count);
 	get_options(&me, (*me)->command_count);
 	file_cmd_path(*me, env, (*me)->command_count);
 	format_options(&me, (*me)->command_count);
 }
 
-static void	create_commands(t_cmd ***me, char **argv, int command_count)
+static void	create_commands(t_cmd ***me, t_environment env, int command_count)
 {
 	int	i;
 
 	i = -1;
 	while (++i < command_count)
-		(**me)[i].full_cmd = argv[i + 2];
+		(**me)[i].full_cmd = env.argv[i + env.here_doc + 2];
 }
 
 static void	get_command(t_cmd ***cmd, int command_count)
@@ -78,12 +77,12 @@ static void	get_options(t_cmd ***cmd, int command_count)
 	}
 }
 
-static void format_options(t_cmd ***cmd, int command_count)
+static void	format_options(t_cmd ***cmd, int command_count)
 {
-	int		i;
-	
+	int	i;
+
 	i = -1;
-	while(++i < command_count)
+	while (++i < command_count)
 	{
 		(**cmd)[i].exec_options = pipex_split((**cmd)[i].full_cmd, ' ');
 		free((**cmd)[i].exec_options[0]);

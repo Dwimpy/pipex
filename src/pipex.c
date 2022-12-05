@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 15:38:54 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/03 18:46:09 by arobu            ###   ########.fr       */
+/*   Updated: 2022/12/05 15:22:47 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	free_memory(t_cmd *cmd, t_environment *env, t_pipeline *pipes)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	free_words_split(env->bin_paths);
@@ -35,7 +35,6 @@ void	free_memory(t_cmd *cmd, t_environment *env, t_pipeline *pipes)
 	free(pipes->input.file_name);
 	free(pipes->output.file_name);
 	free(pipes->pipe);
-
 }
 
 void	pipex(int argc, char **argv, char **envp)
@@ -44,29 +43,21 @@ void	pipex(int argc, char **argv, char **envp)
 	t_environment	env;
 	t_pipeline		pipeline;
 
+	if (argc < 5)
+	{
+		ft_printf("%s", \
+		"Incorrect usage. Use ./pipex input_file cmd1 cmd2 output_file");
+		exit(1);
+	}
+	if (!ft_strncmp(argv[1], "here_doc", 9) && argc < 6)
+	{
+		ft_printf("%s", \
+		"Incorrect usage. Use ./pipex here_doc limiter cmd1 cmd2 output_file");
+	}
 	env_ctor(&env, envp, argc, argv);
-	cmd_ctor(&cmd, env, argc, argv);
+	cmd_ctor(&cmd, env, argc);
 	pipeline_ctor(&pipeline, cmd, &env);
+	if (env.here_doc)
+		unlink("here_doc.tmp");
 	free_memory(cmd, &env, &pipeline);
-
-
 }
-
-	// int fdd;
-	// fdd = open("file2", O_WRONLY);
-
-	// dup2(pipeline.file_fd_input, STDIN_FILENO);
-	// close(fdd);
-	// char	*binaryPath = "/bin/cat";
-	// char	*test[] = {binaryPath, "-e", NULL};
-	// execve("/bin/cat", test, NULL);
-	// ft_printf("Full_cmd 0:%s\n", cmd[0].full_cmd);
-	// ft_printf("Full_cmd 1:%s\n", cmd[1].full_cmd);
-
-
-	// dup2(stdout, STDOUT_FILENO);
-	// ft_printf("%s", buffer);
-	// ft_printf("Cmd bin 0:%s\n", cmd[0].path.full_path);
-	// ft_printf("Cmd bin 1:%s\n", cmd[1].path.full_path);
-	// ft_printf("Pipe input file: %s\n", pipe.input.file_name);
-	// ft_printf("Pipe output file: %s\n", pipe.output.file_name);
