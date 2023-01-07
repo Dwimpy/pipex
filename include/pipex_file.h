@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex_file.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 14:56:29 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 12:42:14 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/07 12:23:15 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/07 14:37:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#ifndef PIPEX_FILE_H
+# define PIPEX_FILE_H
 
-int	main(int argc, char *argv[], char *envp[])
-{	
-	pipex(argc, argv, envp);
-	return (0);
-}
+typedef enum e_file_type
+{
+	IO_FILE = 0,
+	EXE_FILE = 1
+}			t_file_type;
+
+typedef struct s_pipex_file
+{
+	char		*filename;
+	char		*filepath;
+	t_file_type	file_type;
+}				t_pipex_file;
+
+#endif

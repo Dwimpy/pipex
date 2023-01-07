@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2022/12/05 15:26:02 by arobu            ###   ########.fr        #
+#    Updated: 2023/01/07 12:41:35 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MAIN_FILE		= main.c
 # Compiler
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS		= #-Wall -Werror -Wextra #-fsanitize=address -g3
 LDLFLAGS	= -L./libft/ -lft
 
 #Archive and Remove
