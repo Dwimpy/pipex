@@ -47,6 +47,12 @@
 	"cmath": "c",
 	"complex": "c",
 	"ios": "c",
-	"locale": "c"
+	"locale": "c",
+	"__split_buffer": "c",
+	"__hash_table": "c",
+	"memory": "c",
+	"unordered_map": "c",
+	"ft_printf.h": "c",
+	"pipex_states_stack.h": "c"
 }
 }

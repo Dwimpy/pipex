@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 20:31:38 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/08 13:21:33 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_pipex_data	*create_new_data(t_pipex_input *input)
 	t_pipex_data	*data;
 
 	data = (t_pipex_data *)malloc(sizeof(t_pipex_data));
+	if (!data)
+		return (NULL);
 	init_t_pipex_data(&data);
 	data->here_doc = set_here_doc(input);
 	if (data->here_doc == 0)

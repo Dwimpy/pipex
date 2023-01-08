@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:25:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 14:02:21 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/08 13:20:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_pipex_input	*pipex_new_input(int argc, char **argv, char **envp)
 	t_pipex_input	*input;
 
 	input = (t_pipex_input *)malloc(sizeof(t_pipex_input));
+	if (!input)
+		return (NULL);
 	input->argc = argc;
 	input->argv = argv;
 	input->envp = envp;

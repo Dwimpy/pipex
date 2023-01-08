@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 20:26:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 01:30:42 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/08 22:59:12 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,59 @@ void	display_node_values(t_pipex_parser *parser)
 	}
 }
 
-void	set_parser_state(t_pipex_parser *parser, char **input_str)
+void	set_parser_state(t_pipex_parser *parser, t_stack *state)
 {
-	if ((**input_str) == 39)
+	if (peek(state) == '\'')
 		parser->state = SINGLE_QUOTE;
-	else if ((**input_str) == 34)
+	else if (peek(state) == '\"')
 		parser->state = DOUBLE_QUOTE;
-	else if ((**input_str) == 92)
-		parser->state = ESCAPED_CHAR;
-	else
+	else if (isempty(state))
 		parser->state = WHITESPACE;
 }
 
-
-
-void	parse_state_whitespace(t_pipex_parser *parser, char	**remainder)
-{
-	while ((**remainder) && !ft_isspace3(**remainder))
-	{
-		enqueue(parser, **remainder);
-		(*remainder)++;
-	}
-	while (ft_isspace3(*(*remainder + 1)))
-	{
-		(*remainder)++;
-	}
-
+void	consume_chars(t_pipex_parser *parser, t_stack *state, char c)
+{		
+	if (parser->state == WHITESPACE)
+		enqueue(parser, c);
+	else if (parser->state == SINGLE_QUOTE && peek(state) == '\'')
+		enqueue(parser, c);
+	else if (parser->state == DOUBLE_QUOTE && peek(state) == '\"')
+		enqueue(parser, c);
 }
 
-void	run_parser(t_pipex_parser *parser, t_parser_input *input)
+void	update_parser_state(t_stack **state, char **input_str_ptr)
+{
+	if (**input_str_ptr == '\'')
+	{
+		if (peek(*state) == '\'')
+			pop(*state);
+		else
+			push(*state, '\'');
+		(*input_str_ptr)++;
+	}
+	else if (**input_str_ptr == '\"')
+	{
+		if (peek(*state) == '\"')
+			pop(*state);
+		else
+			push(*state, '\"');
+		(*input_str_ptr)++;
+	}gi
+}
+
+void	run_parser(t_pipex_parser *parser, t_stack *state, t_parser_input *input)
 {
 	char	*input_str_ptr;
 
 	input_str_ptr = input->str;
-	set_parser_state(parser, &input_str_ptr);
 	while (*input_str_ptr)
-	{
-		set_parser_state(parser, &input_str_ptr);
-		if (parser->state == WHITESPACE)
-			parse_state_whitespace(parser, &input_str_ptr);
-		else if (parser->state == SINGLE_QUOTE)
-			ft_printf("SINGLE QUOTE\n");
-		ft_printf("State: %d\n", parser->state);
-		input_str_ptr++;
+	{	
+		update_parser_state(&state, &input_str_ptr);
+		set_parser_state(parser, state);
+		if (*input_str_ptr == '\\')
+			input_str_ptr++;
+		consume_chars(parser, state, *input_str_ptr);
+		if (*input_str_ptr)
+			input_str_ptr++;
 	}
 }

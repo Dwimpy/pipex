@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:02:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 22:46:49 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/08 17:36:01 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_PARSER_H
 
 # include "pipex.h"
+# include "pipex_states_stack.h"
 
 typedef struct s_parser_node	t_parser_node;
 
@@ -41,6 +42,7 @@ typedef struct s_pipex_parser
 	t_parser_node	*front;
 	t_parser_node	*rear;
 	t_parser_state	state;
+	t_stack			*state_tracker;
 	int				size;
 }				t_pipex_parser;
 
@@ -49,7 +51,7 @@ t_parser_node	*new_node(char c);
 t_parser_input	*create_input(char	*str);
 
 int				is_empty(t_pipex_parser *parser);
-void			run_parser(t_pipex_parser *parser, t_parser_input *input);
+void			run_parser(t_pipex_parser *parser, t_stack *state, t_parser_input *input);
 void			enqueue(t_pipex_parser *parser, char c);
 void			dequeue(t_pipex_parser *parser);
 void			display_node_values(t_pipex_parser *parser);

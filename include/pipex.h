@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:26:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 20:18:24 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/08 22:10:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ here_doc LIMITER cmd1 cmd2 .. output_file\n"
 # define ERR_ENOENT "\033[0;91mError:\033[0;39m No such file or directory\n"
 # define ERR_EACCESS "\033[0;91mError:\033[0;39m Permission denied\n"
 # define ERR_EBADF "\033[0;91mError:\033[0;39m Bad file descriptor\n"
-# define ENOENT 2
-# define EACCES 13
-# define EBADF 9
+# define ENOENT 2				/* No such file or directory */
+# define EBADF 9				/* Bad file descriptor */
+# define EACCES 13				/* Permission denied */
+# define ECOMMAND_EX_PERISSION 126
+# define ECOMMAND_NOT_FOUND	127
 # include <stdio.h>
+# include "pipex_file.h"
 # include "../libft/include/ft_printf.h"
-# include "../include/pipex_file.h"
-# include "../include/pipex_parser.h"
+# include "pipex_parser.h"
+# include "pipex_states_stack.h"
+# include <errno.h>
 
 typedef struct s_pipex_input
 {
