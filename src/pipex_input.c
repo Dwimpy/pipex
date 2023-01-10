@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:25:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 13:20:22 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/10 15:36:19 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,19 @@ void	pipex_input_validator(t_pipex_input *input)
 
 static void	check_arguments(t_pipex_input *input)
 {
-	int	i;
-
+	int		i;
+	char	*str;
 	i = 1;
 	while (i < input->argc)
 	{
-		if (!ft_strncmp(input->argv[i], "\0", 1))
+		str = ft_strtrim(input->argv[i], " \r\t\v\f\n");
+		if (!ft_strncmp(str, "\0", 1))
 		{
 			ft_putstr_fd(ERR_EMPTY_ARGUMENTS, 2);
+			free(str);
 			exit(EXIT_FAILURE);
 		}
 		i++;
+		free(str);
 	}
 }

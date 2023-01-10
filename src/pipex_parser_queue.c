@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:09:05 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 17:34:32 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/10 13:03:26 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_pipex_parser	*create_parser(void)
 	parser = (t_pipex_parser *)malloc(sizeof(t_pipex_parser));
 	if (!parser)
 		return (NULL);
-	parser->state_tracker = create_stack();
 	parser->front = NULL;
 	parser->rear = NULL;
 	parser->size = 0;

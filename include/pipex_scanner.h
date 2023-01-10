@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_parser_queue_utils.c                         :+:      :+:    :+:   */
+/*   pipex_scanner.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 20:26:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 13:03:21 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/10 13:25:15 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/10 15:18:39 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_parser.h"
+#ifndef PIPEX_SCANNER_H
+# define PIPEX_SCANNER_H
 
-void	display_node_values(t_pipex_parser *parser)
+typedef	struct s_pipex_scanner
 {
-	t_parser_node	*node;
+	int			word_count;
+	char		*parsed_input;
+}				t_pipex_scanner;
 
-	node = parser->front;
-	while (node != NULL)
-	{
-		ft_printf("%c", node->c);
-		node = node->next;
-	}
-}
+typedef struct s_scanner_results
+{
+	t_pipex_scanner	*results;
+}				t_scanner_results;
+
+t_scanner_results	*scan_input(int argc, char **argv);
+char				*scan_string(char *str);
+
+int	count_words(char *str);
+
+#endif

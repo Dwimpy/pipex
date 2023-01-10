@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:26:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 22:10:22 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/10 13:56:01 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ here_doc LIMITER cmd1 cmd2 .. output_file\n"
 # include "pipex_file.h"
 # include "../libft/include/ft_printf.h"
 # include "pipex_parser.h"
-# include "pipex_states_stack.h"
+# include "pipex_scanner.h"
 # include <errno.h>
 
 typedef struct s_pipex_input
