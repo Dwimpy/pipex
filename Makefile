@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/01/08 00:34:53 by arobu            ###   ########.fr        #
+#    Updated: 2023/01/11 15:01:59 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MAIN_FILE		= main.c
 # Compiler
 
 CC			= gcc
-CFLAGS		= #-Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS		= #-fsanitize=address -g3 #-Wall -Werror -Wextra 
 LDLFLAGS	= -L./libft/ -lft
 
 #Archive and Remove
@@ -74,14 +74,15 @@ show:
 fclean:		clean
 			@$(RM) -f $(NAME)
 			@echo "$(CYAN)Executables successfully cleaned!$(DEF_COLOR)"
-#			@$(RM) -f $(LIBFT_LIB)
 
+re:			relibft fclean all		
 
-re:			fclean all
+relibft:	
+			@make re -C $(LIBFT_FOLDER)
 
 bonus: 	$(NAME)
 
 norm:
 			@norminette $(SRC_DIR) $(INCLUDE) | grep -v OK
 		
-.PHONY:		all libft clean fclean re norm
+.PHONY:		all relibft libft clean fclean re norm

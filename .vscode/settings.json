@@ -53,6 +53,8 @@
 	"memory": "c",
 	"unordered_map": "c",
 	"ft_printf.h": "c",
-	"pipex_states_stack.h": "c"
+	"pipex_states_stack.h": "c",
+	"pipex_parser.h": "c",
+	"pipex_file.h": "c"
 }
 }

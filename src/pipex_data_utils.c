@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:03:42 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/07 22:05:15 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/11 15:17:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	init_t_pipex_data(t_pipex_data **data)
 
 void	ft_free_allocated_memory(t_pipex_data *data)
 {
-
 	if (data->input_file)
-		free(data->input_file);
+		ft_free_file(data->input_file);
 	if (data->output_file)
-		free(data->output_file);
+		ft_free_file(data->output_file);
 	if (data->limiter)
 		free(data->limiter);
 	if (data->binaries)
 		ft_free_binaries(data);
 	free(data);
 }
+
 
 static void	ft_free_binaries(t_pipex_data *data)
 {

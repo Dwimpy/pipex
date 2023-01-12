@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:26:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 13:56:01 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/11 15:29:49 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,9 @@ here_doc LIMITER cmd1 cmd2 .. output_file\n"
 # define EACCES 13				/* Permission denied */
 # define ECOMMAND_EX_PERISSION 126
 # define ECOMMAND_NOT_FOUND	127
-# include <stdio.h>
-# include "pipex_file.h"
 # include "../libft/include/ft_printf.h"
+# include "pipex_file.h"
 # include "pipex_parser.h"
-# include "pipex_scanner.h"
-# include <errno.h>
 
 typedef struct s_pipex_input
 {
@@ -48,14 +45,14 @@ typedef struct s_pipex_data
 	char			**binaries;
 }				t_pipex_data;
 
-void			pipex(int argc, char **argv, char **envp);
-void			pipex_input_validator(t_pipex_input *input);
-void			init_t_pipex_data(t_pipex_data **data);
-void			ft_free_allocated_memory(t_pipex_data *data);
+void				pipex(int argc, char **argv, char **envp);
+void				pipex_input_validator(t_pipex_input *input);
+void				init_t_pipex_data(t_pipex_data **data);
+void				ft_free_allocated_memory(t_pipex_data *data);
+t_pipex_input		*pipex_new_input(int argc, char **argv, char **envp);
+t_pipex_data		*create_new_data(t_pipex_input *input);
+t_pipex_file		*new_pipex_input_file(t_pipex_data *data, char *filename);
+t_pipex_file		*new_pipex_output_file(t_pipex_data *data, char *filename);
+t_pipex_file		*new_pipex_exe_file(char *filename, char *filepath);
 
-t_pipex_input	*pipex_new_input(int argc, char **argv, char **envp);
-t_pipex_data	*create_new_data(t_pipex_input *input);
-t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename);
-t_pipex_file	*new_pipex_output_file(t_pipex_data *data, char *filename);
-t_pipex_file	*new_pipex_exe_file(char *filename, char *filepath);
 #endif

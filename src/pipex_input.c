@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:25:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 15:36:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/12 16:02:29 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	pipex_input_validator(t_pipex_input *input)
 	if (input->argc < 5 && ft_strncmp(input->argv[1], "here_doc", 9))
 	{
 		ft_putstr_fd(ERR_INCORRECT_USAGE, 2);
+		free(input);
 		exit(EXIT_FAILURE);
 	}
 	else if (!ft_strncmp(input->argv[1], "here_doc", 9))
@@ -39,6 +40,7 @@ void	pipex_input_validator(t_pipex_input *input)
 		if (input->argc < 6)
 		{
 			ft_putstr_fd(ERR_INCORRECT_USAGE_HEREDOC, 2);
+			free(input);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -49,6 +51,7 @@ static void	check_arguments(t_pipex_input *input)
 {
 	int		i;
 	char	*str;
+
 	i = 1;
 	while (i < input->argc)
 	{
@@ -56,6 +59,7 @@ static void	check_arguments(t_pipex_input *input)
 		if (!ft_strncmp(str, "\0", 1))
 		{
 			ft_putstr_fd(ERR_EMPTY_ARGUMENTS, 2);
+			free(input);
 			free(str);
 			exit(EXIT_FAILURE);
 		}

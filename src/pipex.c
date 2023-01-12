@@ -6,24 +6,40 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 15:20:50 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/12 18:58:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+#include "../include/pipex_scanner.h"
+#include "../include/pipex_state_machine.h"
+
+void	ft_free_pipex_memory(t_pipex_data *data, \
+							t_pipex_input *input, t_pipex_scanner *scanner);
+
 void	pipex(int argc, char **argv, char **envp)
 {
-	t_pipex_input	*pipex_input;
-	t_pipex_data	*pipex_data;
-	t_pipex_parser	*parser;
-	t_parser_input	*parser_input;
-	int				i;
+	t_pipex_input		*pipex_input;
+	t_pipex_data		*pipex_data;
+	t_pipex_scanner		*scanner;
+	int					i;
 
-	parser = create_parser();
 	pipex_input = pipex_new_input(argc, argv, envp);
 	pipex_input_validator(pipex_input);
 	pipex_data = create_new_data(pipex_input);
-	parser_input = create_input(pipex_input->argv[3]);
-	display_node_values(parser);
-	ft_printf("Scanned Str: %s\tString: %s\tChars: %d\t", scan_string(argv[2]), argv[2], ft_strlen(argv[2]));
+	scanner = scan_input(pipex_input, pipex_data);
+	fsm_run(&scanner->results[0]);
+	ft_printf("Parsed: %s\n", scanner->results[0].parsed_input);
+	fsm_run(&scanner->results[1]);
+	ft_printf("Parsed: %s\n", scanner->results[1].parsed_input);
+	//display_scanner_results(scanner);
+	ft_free_pipex_memory(pipex_data, pipex_input, scanner);
+}
+
+void	ft_free_pipex_memory(t_pipex_data *data, \
+							t_pipex_input *input, t_pipex_scanner *scanner)
+{
+	ft_free_allocated_memory(data);
+	ft_free_scanner(scanner);
+	free(input);
 }

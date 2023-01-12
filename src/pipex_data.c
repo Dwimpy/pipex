@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 13:21:33 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/11 15:20:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ static char	**set_path_binaries(t_pipex_input *input)
 	}
 	if (env_path)
 		binaries = ft_split(env_path + 5, ':');
+	free(env_path);
 	return (binaries);
 }

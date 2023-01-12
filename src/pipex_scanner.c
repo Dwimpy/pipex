@@ -6,21 +6,35 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:28:04 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 22:39:23 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/11 14:30:58 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_scanner.h"
-#include "../libft/include/ft_printf.h"
 
 static char	*str_fix_whitespaces(char *str, int new_len);
 static int	count_parsed_characters(char *str);
 
-t_scanner_results	*scan_input(int argc, char **argv)
+t_pipex_scanner	*scan_input(t_pipex_input *input, t_pipex_data *data)
 {
-	t_scanner_results *results;
-	
-	results = (t_scanner_results *)malloc(sizeof(t_scanner_results));
+	t_pipex_scanner				*scanner;
+	t_pipex_scanner_results		*results_ptr;
+	int							start_arg;
+	int							end_arg;
+
+	scanner = init_scanner(data->here_doc, input->argc, &start_arg, &end_arg);
+	if (!scanner || !scanner->results)
+		return (NULL);
+	results_ptr = scanner->results;
+	while (start_arg < end_arg)
+	{
+		results_ptr->parsed_input = scan_string(input->argv[start_arg]);
+		scanner->size++;
+		results_ptr++;
+		start_arg++;
+	}
+	results_ptr = NULL;
+	return (scanner);
 }
 
 char	*scan_string(char *str)
@@ -36,7 +50,7 @@ char	*scan_string(char *str)
 	return (parsed_input);
 }
 
-static void	add_bytes(char **str, char c)
+void	add_bytes(char **str, char c)
 {
 	char	bytes[2];
 	char	*str_ptr;
@@ -59,28 +73,7 @@ static char	*str_fix_whitespaces(char *str, int new_len)
 	begin = parsed_str;
 	if (!parsed_str)
 		return (NULL);
-	while (*str)
-	{
-		if (ft_isspace3(*str) && has_whitespace == 1)
-		{
-			str++;
-			continue ;
-		}
-		if (ft_isspace3(*str) && has_whitespace == 0)
-		{
-			has_whitespace = 1;
-			add_bytes(&begin, *str);
-			begin++;
-			continue ;
-		}
-		if (!ft_isspace3(*str))
-		{
-			has_whitespace = 0;
-			add_bytes(&begin, *str);
-			begin++;
-			str++;
-		}
-	}
+	fix_whitespace_helper(&has_whitespace, &str, &begin);
 	return (parsed_str);
 }
 
@@ -111,9 +104,4 @@ static int	count_parsed_characters(char *str)
 		str++;
 	}
 	return (new_len);
-}
-
-int	count_words(char *str)
-{
-	
 }
