@@ -55,6 +55,9 @@
 	"ft_printf.h": "c",
 	"pipex_states_stack.h": "c",
 	"pipex_parser.h": "c",
-	"pipex_file.h": "c"
+	"pipex_file.h": "c",
+	"tuple": "c",
+	"type_traits": "c",
+	"__node_handle": "c"
 }
 }

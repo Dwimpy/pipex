@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_parser_queue_utils.c                         :+:      :+:    :+:   */
+/*   pipex_states_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 20:26:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/10 13:03:21 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/13 15:26:59 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/13 15:50:15 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_parser.h"
+#include "../include/pipex_states.h"
 
-void	display_node_values(t_pipex_parser *parser)
+int	is_empty_state(t_fsm_stack *stack)
 {
-	t_parser_node	*node;
-
-	node = parser->front;
-	while (node != NULL)
-	{
-		ft_printf("%c", node->c);
-		node = node->next;
-	}
+	return (stack->size == 0);
 }
+

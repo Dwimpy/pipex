@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/01/11 15:01:59 by arobu            ###   ########.fr        #
+#    Updated: 2023/01/13 16:36:27 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ fclean:		clean
 			@$(RM) -f $(NAME)
 			@echo "$(CYAN)Executables successfully cleaned!$(DEF_COLOR)"
 
-re:			relibft fclean all		
+re:			fclean all		
 
 relibft:	
 			@make re -C $(LIBFT_FOLDER)

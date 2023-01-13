@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/12 18:58:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/13 16:58:35 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ void	pipex(int argc, char **argv, char **envp)
 	pipex_input_validator(pipex_input);
 	pipex_data = create_new_data(pipex_input);
 	scanner = scan_input(pipex_input, pipex_data);
-	fsm_run(&scanner->results[0]);
-	ft_printf("Parsed: %s\n", scanner->results[0].parsed_input);
-	fsm_run(&scanner->results[1]);
-	ft_printf("Parsed: %s\n", scanner->results[1].parsed_input);
-	//display_scanner_results(scanner);
+	display_scanner_results(scanner);
 	ft_free_pipex_memory(pipex_data, pipex_input, scanner);
 }
 

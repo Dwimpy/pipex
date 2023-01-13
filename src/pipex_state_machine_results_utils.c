@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_parser_input.c                               :+:      :+:    :+:   */
+/*   pipex_state_machine_results_utils.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 18:06:31 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/11 14:29:59 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/13 17:06:17 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/13 17:07:55 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_parser.h"
+#include "../include/pipex_state_machine.h"
 
-t_parser_input	*create_input(char	*str)
+void	display_result_values(t_fsm_results *results)
 {
-	t_parser_input	*input;
-	char			*str_input_ptr;
+	t_fsm_results_node	*node;
 
-	input = (t_parser_input *)malloc(sizeof(t_parser_input));
-	if (!input)
-		return (NULL);
-	input->str = ft_strdup(str);
-	str_input_ptr = input->str;
-	input->str = ft_strtrim(input->str, " \r\t\v\f\n");
-	ft_printf("%s\n", input->str);
-	free(str_input_ptr);
-	return (input);
+	node = results->front;
+	while (node)
+	{
+		ft_printf("%s\n", node->word);
+		node = node->next;
+	}
 }
