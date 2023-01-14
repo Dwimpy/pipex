@@ -6,16 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:24:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 22:07:07 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/14 18:53:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "../include/pipex_file.h"
 #include "../include/pipex.h"
-
-static void	check_input_file_access(t_pipex_data *data, char *filename);
-static void	check_output_file_access(t_pipex_data *data, char *filename);
 
 t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename)
 {
@@ -53,51 +49,7 @@ t_pipex_file	*new_pipex_exe_file(char *filename, char *filepath)
 	if (!file)
 		return (NULL);
 	file->filename = ft_strdup(filename);
-	file->filepath = filepath;
+	file->filepath = ft_strdup(filepath);
 	file->file_type = EXE_FILE;
 	return (file);
-}
-
-static void	check_input_file_access(t_pipex_data *data, char *filename)
-{
-	int	fd;
-
-	if (access(filename, F_OK) == -1)
-	{
-		ft_putstr_fd(ERR_ENOENT, 2);
-		ft_free_allocated_memory(data);
-		exit(EXIT_FAILURE);
-	}
-	else if (access(filename, R_OK) == -1)
-	{
-		ft_putstr_fd(ERR_EACCESS, 2);
-		ft_free_allocated_memory(data);
-		exit(EXIT_FAILURE);
-	}
-}
-
-static void	check_output_file_access(t_pipex_data *data, char *filename)
-{
-	int	fd;
-
-	if (access(filename, F_OK) == 0)
-	{
-		if (access(filename, W_OK) == -1)
-		{
-			ft_putstr_fd(ERR_EACCESS, 2);
-			ft_free_allocated_memory(data);
-			exit(EXIT_FAILURE);
-		}
-	}
-	else if (access(filename, F_OK) == -1)
-	{
-		fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-		{
-			ft_putstr_fd(ERR_EBADF, 2);
-			ft_free_allocated_memory(data);
-			exit(EXIT_FAILURE);
-		}
-		close(fd);
-	}
 }

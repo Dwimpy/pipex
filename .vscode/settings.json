@@ -58,6 +58,9 @@
 	"pipex_file.h": "c",
 	"tuple": "c",
 	"type_traits": "c",
-	"__node_handle": "c"
+	"__node_handle": "c",
+	"fcntl.h": "c",
+	"stdlib.h": "c",
+	"pipex_commands.h": "c"
 }
 }

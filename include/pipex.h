@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:26:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:10 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/14 18:18:59 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ here_doc LIMITER cmd1 cmd2 .. output_file\n"
 # define ECOMMAND_NOT_FOUND	127
 # include "../libft/include/ft_printf.h"
 # include "pipex_file.h"
-# include "pipex_state_machine.h"
+# include "pipex_scanner.h"
+# include "pipex_parser.h"
 
 typedef struct s_pipex_input
 {
@@ -48,7 +49,12 @@ typedef struct s_pipex_data
 void				pipex(int argc, char **argv, char **envp);
 void				pipex_input_validator(t_pipex_input *input);
 void				init_t_pipex_data(t_pipex_data **data);
+void				check_input_file_access(t_pipex_data *data, char *filename);
+void				check_output_file_access(t_pipex_data *data,\
+											char *filename);
+int					check_exe_file_access(char *filepath);
 void				ft_free_allocated_memory(t_pipex_data *data);
+t_pipex_scanner		*scan_input(t_pipex_input *input, t_pipex_data *data);
 t_pipex_input		*pipex_new_input(int argc, char **argv, char **envp);
 t_pipex_data		*create_new_data(t_pipex_input *input);
 t_pipex_file		*new_pipex_input_file(t_pipex_data *data, char *filename);

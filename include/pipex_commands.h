@@ -6,20 +6,25 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:11:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/08 22:14:15 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/14 20:53:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_COMMANDS_H
 # define PIPEX_COMMANDS_H
 
-# include "pipex_file.h"
+# include "../include/pipex.h"
 
 typedef struct s_pipex_command
 {
-	t_pipex_file	*path;
+	t_pipex_file	*file;
 	char			*cmd;
 	char			*option;	
 }				t_pipex_command;
+
+t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
+								t_pipex_data	*pipex_data);
+void			parse_nodes(t_fsm_results **result, int size);
+void			parse_escape(char **str);
 
 #endif
