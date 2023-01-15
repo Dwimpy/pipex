@@ -61,6 +61,7 @@
 	"__node_handle": "c",
 	"fcntl.h": "c",
 	"stdlib.h": "c",
-	"pipex_commands.h": "c"
+	"pipex_commands.h": "c",
+	"pipex_pipes.h": "c"
 }
 }

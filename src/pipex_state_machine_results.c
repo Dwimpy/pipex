@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:41:44 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 13:43:32 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/15 15:12:37 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_fsm_results_node	*new_result_node(char *word)
 	node = (t_fsm_results_node *)malloc(sizeof(t_fsm_results_node));
 	if (!node)
 		return (NULL);
-	node->word = ft_strdup(word);
+	node->word = word;
 	node->next = NULL;
 	return (node);
 }

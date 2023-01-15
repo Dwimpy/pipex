@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_file.h                                       :+:      :+:    :+:   */
+/*   pipex_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 12:23:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 17:03:50 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/15 17:17:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_FILE_H
-# define PIPEX_FILE_H
+#include "../include/pipex_pipes.h"
 
-#include <fcntl.h>
-#include <stdlib.h>
-
-typedef enum e_file_type
+int	ft_redirect_io(int input, int output)
 {
-	IO_FILE = 0,
-	EXE_FILE = 1
-}			t_file_type;
+	if (dup2(input, STDIN_FILENO) == -1)
+		return (-1);
+	if (dup2(output, STDOUT_FILENO) == -1)
+		return (-1);
+	return (0);
+}
 
-typedef struct s_pipex_file
+void	close_pipe_fd(t_pipex_pipes *pipes)
 {
-	char		*filename;
-	char		*filepath;
-	t_file_type	file_type;
-}				t_pipex_file;
-
-void	ft_free_file(t_pipex_file *file);
-
-#endif
+	close(pipes->pipe_one[READ_END]);
+	close(pipes->pipe_one[WRITE_END]);
+	close(pipes->pipe_two[READ_END]);
+	close(pipes->pipe_two[WRITE_END]);
+}

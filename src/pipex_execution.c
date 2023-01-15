@@ -1,34 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_file.h                                       :+:      :+:    :+:   */
+/*   pipex_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 12:23:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 17:03:50 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/15 17:54:31 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_FILE_H
-# define PIPEX_FILE_H
-
-#include <fcntl.h>
-#include <stdlib.h>
-
-typedef enum e_file_type
-{
-	IO_FILE = 0,
-	EXE_FILE = 1
-}			t_file_type;
-
-typedef struct s_pipex_file
-{
-	char		*filename;
-	char		*filepath;
-	t_file_type	file_type;
-}				t_pipex_file;
-
-void	ft_free_file(t_pipex_file *file);
-
-#endif

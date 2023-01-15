@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:11:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 20:53:22 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/15 15:30:10 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 								t_pipex_data	*pipex_data);
 void			parse_nodes(t_fsm_results **result, int size);
 void			parse_escape(char **str);
+void			ft_free_commands(t_pipex_command *commands, int size);
 
 #endif

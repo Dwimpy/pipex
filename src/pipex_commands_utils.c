@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:52:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 20:52:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/15 15:19:54 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ void	parse_escape(char **str)
 		(*str)[i] = (*str)[i + escaped_chars];
 		i++;
 	}
+}
+
+void	ft_free_commands(t_pipex_command *commands, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(commands[i].cmd);
+		if (commands[i].option)
+			free(commands[i].option);
+		if (commands[i].file)
+			ft_free_file(commands[i].file);
+		i++;
+	}
+	free(commands);
 }

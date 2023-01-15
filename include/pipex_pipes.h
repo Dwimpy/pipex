@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_file.h                                       :+:      :+:    :+:   */
+/*   pipex_pipes.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 12:23:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 17:03:50 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/15 16:37:57 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/15 17:15:31 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_FILE_H
-# define PIPEX_FILE_H
+#ifndef PIPEX_PIPES_H
+# define PIPEX_PIPES_H
+# define READ_END 0
+# define WRITE_END 0
 
-#include <fcntl.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
 
-typedef enum e_file_type
+typedef struct s_pipex_pipes
 {
-	IO_FILE = 0,
-	EXE_FILE = 1
-}			t_file_type;
+	int			pipe_one[2];
+	int			pipe_two[2];
+}				t_pipex_pipes;
 
-typedef struct s_pipex_file
-{
-	char		*filename;
-	char		*filepath;
-	t_file_type	file_type;
-}				t_pipex_file;
-
-void	ft_free_file(t_pipex_file *file);
+int	ft_redirect_io(int input, int output);
 
 #endif

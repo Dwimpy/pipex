@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 17:09:50 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/15 17:57:50 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ void	pipex(int argc, char **argv, char **envp)
 {
 	t_pipex_input		*pipex_input;
 	t_pipex_data		*pipex_data;
+	t_pipex_command		*commands;
 
 	pipex_input = pipex_new_input(argc, argv, envp);
 	pipex_input_validator(pipex_input);
 	pipex_data = create_new_data(pipex_input);
-	get_pipex_commands(pipex_input, pipex_data);
+	commands = get_pipex_commands(pipex_input, pipex_data);
+
+	ft_free_commands(commands, pipex_input->argc - pipex_data->here_doc - 3);
 	ft_free_pipex_memory(pipex_data, pipex_input);
 }
 
