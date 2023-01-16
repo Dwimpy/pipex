@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 16:55:18 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 18:38:11 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_pipex_data	*create_new_data(t_pipex_input *input)
 		return (NULL);
 	init_t_pipex_data(&data);
 	data->here_doc = set_here_doc(input);
+	(*data).command_number = input->argc - data->here_doc - 3;
 	if (data->here_doc == 0)
 		data->input_file = new_pipex_input_file(data, input->argv[1]);
 	else

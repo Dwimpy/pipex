@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:52:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 15:19:54 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 17:22:36 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,61 @@
 
 void	parse_nodes(t_fsm_results **result, int size)
 {
-	int		i;
-	int		j;
+	int					i;
+	int					j;
+	t_fsm_results_node	*word;
 
 	i = 0;
 	while (i < size)
 	{
-		parse_escape(&result[i]->front->word);
-		if (result[i]->rear != NULL)
-			parse_escape(&result[i]->front->word);
+		word = result[i]->front;
+		while (word != NULL)
+		{
+			parse_escape(&word->word);
+			word = word->next;
+		}
 		i++;
 	}
+}
+
+t_pipex_command	*initialize_commands(int size)
+{
+	int				i;
+	t_pipex_command	*commands;
+
+	commands = (t_pipex_command *)malloc(sizeof(t_pipex_command) * size);
+	i = 0;
+	if (!commands)
+		return (NULL);
+	while (i < size)
+	{
+		commands[i].cmd = NULL;
+		commands[i].option = NULL;
+		commands[i].file = NULL;
+		i++;
+	}
+	return (commands);
 }
 
 void	parse_escape(char **str)
 {
 	int		i;
-	int		escaped_chars;
-	char	*parsed_str;
 	int		j;
+	char	*str_cpy;
 
 	i = 0;
-	escaped_chars = 0;
-	if (!str)
-		return ;
-	while (i < ft_strlen(*str))
+	j = 0;
+	str_cpy = ft_strdup(*str);
+	while (j < ft_strlen(*str))
 	{
-		if ((*str)[i] == '\\')
-			escaped_chars++;
-		(*str)[i] = (*str)[i + escaped_chars];
+		if ((str_cpy[j]) == '\\')
+			j++;
+		(*str)[i] = str_cpy[j];
 		i++;
+		j++;
 	}
+	(*str)[i] = '\0';
+	free(str_cpy);
 }
 
 void	ft_free_commands(t_pipex_command *commands, int size)

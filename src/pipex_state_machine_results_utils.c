@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:06:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 15:09:57 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 15:19:37 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	display_result_values(t_fsm_results *results)
 		ft_printf("%s\n", node->word);
 		node = node->next;
 	}
+}
+
+void	init_state_machine(t_state_machine *fsm)
+{
+	(*fsm).e_state = NOTHING;
+	(*fsm).states = create_state_stack();
 }
 
 void	ft_free_results(t_fsm_results **result, int size)

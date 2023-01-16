@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:03:42 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 16:55:26 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 18:35:39 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	ft_free_binaries(t_pipex_data *data);
 
 void	init_t_pipex_data(t_pipex_data **data)
 {
+	(**data).command_number = 0;
 	(*data)->here_doc = 0;
 	(*data)->binaries = NULL;
 	(*data)->input_file = NULL;

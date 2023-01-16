@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:26:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 17:08:05 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 18:35:17 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_pipex_data
 {
 	t_pipex_file	*input_file;
 	t_pipex_file	*output_file;
+	int				command_number;
 	int				here_doc;
 	char			*limiter;
 	char			**binaries;

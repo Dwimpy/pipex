@@ -62,6 +62,8 @@
 	"fcntl.h": "c",
 	"stdlib.h": "c",
 	"pipex_commands.h": "c",
-	"pipex_pipes.h": "c"
+	"pipex_pipes.h": "c",
+	"pipex_execution.h": "c",
+	"__locale": "c"
 }
 }

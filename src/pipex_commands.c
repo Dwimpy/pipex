@@ -6,17 +6,17 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/15 16:37:23 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/16 21:14:48 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_commands.h"
 
 static t_fsm_results	**get_fsm_results(t_pipex_scanner *scanner);
-static t_pipex_command	*initialize_commands(int size);
 static t_pipex_file		*get_command_path(char *cmd, char **binaries);
 static t_pipex_command	*create_commands(t_fsm_results **result, \
 										t_pipex_data *data, int size);
+static char				*get_command_option(t_fsm_results *result);
 
 t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 								t_pipex_data	*pipex_data)
@@ -29,6 +29,7 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 	i = 0;
 	scanner = scan_input(pipex_input, pipex_data);
 	fsm_results = get_fsm_results(scanner);
+	//display_result_values(fsm_results[1]);
 	parse_nodes(fsm_results, scanner->size);
 	commands = create_commands(fsm_results, pipex_data, scanner->size);
 	ft_free_results(fsm_results, scanner->size);
@@ -65,34 +66,41 @@ static t_pipex_command	*create_commands(t_fsm_results **result, \
 	while (i < size)
 	{
 		commands[i].cmd = ft_strdup(result[i]->front->word);
-		if (result[i]->size > 1)
-			commands[i].option = ft_strdup(result[i]->rear->word);
+		commands[i].option = get_command_option(result[i]);
 		commands[i].file = get_command_path(commands[i].cmd, data->binaries);
 		i++;
 	}
 	return (commands);
 }
 
-static t_pipex_command	*initialize_commands(int size)
+static char	*get_command_option(t_fsm_results *result)
 {
-	int				i;
-	t_pipex_command	*commands;
+	t_fsm_results_node	*word;
+	char				*tmp;
+	char				*option;
+	char				*trimmed_option;
 
-	commands = (t_pipex_command *)malloc(sizeof(t_pipex_command) * size);
-	i = 0;
-	if (!commands)
-		return (NULL);
-	while (i < size)
+	word = result->front;
+	option = NULL;
+	tmp = NULL;
+	while (word -> next != NULL)
 	{
-		commands[i].cmd = NULL;
-		commands[i].option = NULL;
-		commands[i].file = NULL;
-		i++;
+		if (option)
+			tmp = option;
+		if (!option)
+			option = ft_strjoin(" ", word->next->word);
+		else
+			option = ft_strjoin_three(option, " ", word->next->word);
+		if (tmp)
+			free(tmp);
+		word = word -> next;
 	}
-	return (commands);
+	trimmed_option = ft_strtrim(option, " \t\r\v\f\n");
+	free(option);
+	return (trimmed_option);
 }
 
-static t_pipex_file *get_command_path(char *cmd, char **binaries)
+static t_pipex_file	*get_command_path(char *cmd, char **binaries)
 {
 	char			*full_path;
 	t_pipex_file	*file;
@@ -101,12 +109,12 @@ static t_pipex_file *get_command_path(char *cmd, char **binaries)
 
 	size = 0;
 	i = -1;
-	file = NULL;
 	while (binaries[size] != NULL)
 		size++;
 	while (++i < size)
 	{
-		if (ft_strncmp(cmd, "./", 2) == 0 && ft_strncmp(ft_strrchr(cmd, '.'), ".sh", 3) == 0)
+		if (ft_strncmp(cmd, "./", 2) == 0 && \
+			ft_strncmp(ft_strrchr(cmd, '.'), ".sh", 3) == 0)
 			full_path = ft_strdup(cmd);
 		else
 			full_path = ft_strjoin_three(binaries[i], "/", cmd);
@@ -118,6 +126,5 @@ static t_pipex_file *get_command_path(char *cmd, char **binaries)
 		}	
 		free(full_path);
 	}
-	return (file);
+	return (NULL);
 }
-
