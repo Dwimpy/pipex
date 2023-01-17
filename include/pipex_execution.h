@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:26:47 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 02:31:56 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 19:29:23 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 typedef struct s_pipex_exectuion
 {
 	char		*command_path;
-	char		*args[2];
+	char		**cmd_options;
 	char		**envp;
 }				t_pipex_execution;
 
-void	ft_pipex_executor(t_pipex_command *commands, char **envp, \
-						t_pipex_data *pipex_data, int size);
-void	fork_command(t_pipex_execution executor, t_pipex_pipeline *pipeline, int size);
+void	ft_pipex_executor(t_pipex_command *commands, t_pipex_input *input, \
+						t_pipex_data *pipex_data, t_pipex_errors *err_handler);
+pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
+					t_pipex_pipeline *pipeline, t_pipex_data *data);
 void	create_pipeline(t_pipex_pipeline *pipeline, t_pipex_data *data);
 
 #endif

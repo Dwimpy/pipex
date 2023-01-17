@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:04:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 18:13:31 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:51:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void					init_state_machine(t_state_machine *fsm);
 void					enqueue(t_fsm_results *results, char *str);
 void					dequeue(t_fsm_results *results);
 void					ft_free_results(t_fsm_results **result, int size);
-void	fsm_regular_update_state(t_word_tracker *tracker, \
-					t_fsm_states state, t_state_machine *fsm);
-void	fsm_quotes_update_state(t_word_tracker *tracker, \
-					t_fsm_states state, char c, t_state_machine *fsm);
-		
+void					fsm_regular_update_state(t_word_tracker *tracker, \
+						t_fsm_states state, t_state_machine *fsm);
+void					fsm_quotes_update_state(t_word_tracker *tracker, \
+						t_fsm_states state, char c, t_state_machine *fsm);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:03:42 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 18:35:39 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 15:37:46 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_free_allocated_memory(t_pipex_data *data)
 		ft_free_binaries(data);
 	free(data);
 }
-
 
 static void	ft_free_binaries(t_pipex_data *data)
 {

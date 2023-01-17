@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:52:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 17:22:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:02:44 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_pipex_command	*initialize_commands(int size)
 	while (i < size)
 	{
 		commands[i].cmd = NULL;
-		commands[i].option = NULL;
+		commands[i].options = NULL;
 		commands[i].file = NULL;
 		i++;
 	}
@@ -79,11 +79,27 @@ void	ft_free_commands(t_pipex_command *commands, int size)
 	while (i < size)
 	{
 		free(commands[i].cmd);
-		if (commands[i].option)
-			free(commands[i].option);
+		if (commands[i].options != NULL)
+			ft_free_command_options(commands[i].options);
 		if (commands[i].file)
 			ft_free_file(commands[i].file);
 		i++;
 	}
 	free(commands);
+}
+
+void	ft_free_command_options(char **options)
+{
+	int	i;
+
+	i = 0;
+	if (options)
+	{
+		while (options[i] != NULL)
+		{
+			free(options[i]);
+			i++;
+		}
+		free(options);
+	}
 }

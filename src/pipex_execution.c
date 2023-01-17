@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 03:33:51 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 20:14:29 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,35 @@
 #include <sys/wait.h>
 
 static void	set_execution_parameters(t_pipex_execution *executor, \
-								t_pipex_command command, char **envp);
+						t_pipex_command command, char **envp);
 
-void	ft_pipex_executor(t_pipex_command *commands, char **envp, \
-							t_pipex_data *pipex_data, int size)
+void	ft_pipex_executor(t_pipex_command *commands, t_pipex_input *input, \
+						t_pipex_data *pipex_data, t_pipex_errors *err_handler)
 {
 	t_pipex_execution	pipex_executor;
 	t_pipex_pipeline	pipeline;
+	pid_t				status;
 
 	create_pipeline(&pipeline, pipex_data);
-	while (pipeline.child < size)
+	while (pipeline.child < pipex_data->command_number)
 	{
-		set_execution_parameters(&pipex_executor, commands[pipeline.child], envp);
-		fork_command(pipex_executor, &pipeline, pipex_data->command_number);
+		set_execution_parameters(&pipex_executor, \
+								commands[pipeline.child], input->envp);
+		pipeline.pid = fork_command(&pipex_executor, err_handler, \
+									&pipeline, pipex_data);
 		pipeline.child++;
 	}
-
+	close_pipe_fds_parent(&pipeline, pipex_data->command_number);
+	waitpid(pipeline.pid, &err_handler->pid_exit_code, 0);
+	free(pipeline.pipe);
 }
 
 void	create_pipeline(t_pipex_pipeline *pipeline, t_pipex_data *data)
 {
 	(*pipeline).child = 0;
 	(*pipeline).file_fd_input = open(data->input_file->filename, O_RDONLY);
-	(*pipeline).file_fd_output = open(data->output_file->filename, O_WRONLY | O_TRUNC);
+	(*pipeline).file_fd_output = open(data->output_file->filename, \
+									O_WRONLY | O_TRUNC);
 	(*pipeline).pipe = create_pipes(data->command_number);
 }
 
@@ -46,27 +52,24 @@ static void	set_execution_parameters(t_pipex_execution *executor, \
 {
 	executor->envp = envp;
 	executor->command_path = command.file->filepath;
-	executor->args[0] = command.cmd;
-	executor->args[1] = command.option;
-	executor->args[2] = NULL;
+	executor->cmd_options = command.options;
 }
 
-void	fork_command(t_pipex_execution executor, t_pipex_pipeline *pipeline, int size)
+pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
+					t_pipex_pipeline *pipeline, t_pipex_data *data)
 {
 	pid_t	pid;
-	int		status;
-	
+
 	pid = fork();
-	status = 0;
 	if (pid == 0)
 	{
-		ft_printf("ForK: [%s]\n", executor.args[0]);
-		ft_printf("Fork: [%s]\n", executor.args[1]);
-		ft_redirect_pipes(&pipeline, size);
-		close_pipe_fds(&pipeline, size);
-		if (execve(executor.command_path, executor.args, executor.envp) == -1)
+		ft_redirect_pipes(&pipeline, data->command_number);
+		close_pipe_fds(&pipeline, data->command_number);
+		if (execve(executor->command_path, \
+				executor->cmd_options, executor->envp) == -1)
 		{
-			exit (-1);
+			exit (EXIT_FAILURE);
 		}
 	}
+	return (pid);
 }

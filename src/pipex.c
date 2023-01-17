@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 02:37:48 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 20:14:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ void	pipex(int argc, char **argv, char **envp)
 	t_pipex_input		*pipex_input;
 	t_pipex_data		*pipex_data;
 	t_pipex_command		*commands;
+	t_pipex_errors		err_handler;
 
-	pipex_input = pipex_new_input(argc, argv, envp);
-	pipex_input_validator(pipex_input);
-	pipex_data = create_new_data(pipex_input);
+	init_error_handler(&err_handler);
+	pipex_input = pipex_new_input(argc, argv, envp, &err_handler);
+	pipex_input_validator(pipex_input, &err_handler);
+	pipex_data = create_new_data(pipex_input, &err_handler);
 	commands = get_pipex_commands(pipex_input, pipex_data);
-	ft_pipex_executor(commands, pipex_input->envp, \
-					pipex_data, pipex_data->command_number);
+	ft_pipex_executor(commands, pipex_input, \
+					pipex_data, &err_handler);
 	ft_free_commands(commands, pipex_data->command_number);
 	ft_free_pipex_memory(pipex_data, pipex_input);
+	exit(WEXITSTATUS(err_handler.pid_exit_code));
 }
 
 void	ft_free_pipex_memory(t_pipex_data *data, t_pipex_input *input)

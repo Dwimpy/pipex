@@ -6,18 +6,19 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:24:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 18:53:09 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 18:54:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_file.h"
 #include "../include/pipex.h"
 
-t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename)
+t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename, \
+									t_pipex_errors *err_handler)
 {
 	t_pipex_file	*file;
 
-	check_input_file_access(data, filename);
+	//check_input_file_access(data, filename, err_handler);
 	file = (t_pipex_file *)malloc(sizeof(t_pipex_file));
 	if (!file)
 		return (NULL);
@@ -27,11 +28,12 @@ t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename)
 	return (file);
 }
 
-t_pipex_file	*new_pipex_output_file(t_pipex_data *data, char *filename)
+t_pipex_file	*new_pipex_output_file(t_pipex_data *data, char *filename, \
+									t_pipex_errors *err_handler)
 {
 	t_pipex_file	*file;
 
-	check_output_file_access(data, filename);
+	check_output_file_access(data, filename, err_handler);
 	file = (t_pipex_file *)malloc(sizeof(t_pipex_file));
 	if (!file)
 		return (NULL);

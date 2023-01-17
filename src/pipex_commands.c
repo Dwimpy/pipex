@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 03:18:47 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:04:27 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_fsm_results	**get_fsm_results(t_pipex_scanner *scanner);
 static t_pipex_file		*get_command_path(char *cmd, char **binaries);
 static t_pipex_command	*create_commands(t_fsm_results **result, \
 										t_pipex_data *data, int size);
-static char				*get_command_option(t_fsm_results *result);
+static char				**get_command_option(t_fsm_results *result);
 
 t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 								t_pipex_data	*pipex_data)
@@ -30,6 +30,7 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 	scanner = scan_input(pipex_input, pipex_data);
 	fsm_results = get_fsm_results(scanner);
 	parse_nodes(fsm_results, scanner->size);
+	//display_result_values(fsm_results[0]);
 	commands = create_commands(fsm_results, pipex_data, scanner->size);
 	ft_free_results(fsm_results, scanner->size);
 	ft_free_scanner(scanner);
@@ -65,38 +66,35 @@ static t_pipex_command	*create_commands(t_fsm_results **result, \
 	while (i < size)
 	{
 		commands[i].cmd = ft_strdup(result[i]->front->word);
-		commands[i].option = get_command_option(result[i]);
+		commands[i].options = get_command_option(result[i]);
 		commands[i].file = get_command_path(commands[i].cmd, data->binaries);
 		i++;
 	}
+	i = 0;
 	return (commands);
 }
 
-static char	*get_command_option(t_fsm_results *result)
+static char	**get_command_option(t_fsm_results *result)
 {
 	t_fsm_results_node	*word;
-	char				*tmp;
-	char				*option;
+	char				**options;
 	char				*trimmed_option;
+	int					i;
 
-	word = result->front -> next;
-	option = NULL;
-	tmp = NULL;
-	while (word != NULL)
+	word = result->front;
+	options = NULL;
+	options = (char **)malloc(sizeof(char *) * (result->size + 1));
+	i = 0;
+	while (i < result->size)
 	{
-		if (option)
-			tmp = option;
-		if (!option)
-			option = ft_strjoin(" ", word->word);
-		else
-			option = ft_strjoin_three(option, " ", word->word);
-		if (tmp)
-			free(tmp);
-		word = word -> next;
+		trimmed_option = ft_strtrim(word->word, " \t\r\v\f\n");
+		options[i] = ft_strdup(trimmed_option);
+		word = word->next;
+		i++;
+		free(trimmed_option);
 	}
-	trimmed_option = ft_strtrim(option, " \t\r\v\f\n");
-	free(option);
-	return (trimmed_option);
+	options[i] = 0;
+	return (options);
 }
 
 static t_pipex_file	*get_command_path(char *cmd, char **binaries)
