@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:25:21 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/12 16:02:29 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 02:46:57 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_pipex_input	*pipex_new_input(int argc, char **argv, char **envp)
 	input->argc = argc;
 	input->argv = argv;
 	input->envp = envp;
+	if (input->argc == 1)
+		exit(EXIT_FAILURE);
 	return (input);
 }
 

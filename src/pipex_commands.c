@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 21:14:48 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 03:18:47 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 	i = 0;
 	scanner = scan_input(pipex_input, pipex_data);
 	fsm_results = get_fsm_results(scanner);
-	//display_result_values(fsm_results[1]);
 	parse_nodes(fsm_results, scanner->size);
 	commands = create_commands(fsm_results, pipex_data, scanner->size);
 	ft_free_results(fsm_results, scanner->size);
@@ -80,17 +79,17 @@ static char	*get_command_option(t_fsm_results *result)
 	char				*option;
 	char				*trimmed_option;
 
-	word = result->front;
+	word = result->front -> next;
 	option = NULL;
 	tmp = NULL;
-	while (word -> next != NULL)
+	while (word != NULL)
 	{
 		if (option)
 			tmp = option;
 		if (!option)
-			option = ft_strjoin(" ", word->next->word);
+			option = ft_strjoin(" ", word->word);
 		else
-			option = ft_strjoin_three(option, " ", word->next->word);
+			option = ft_strjoin_three(option, " ", word->word);
 		if (tmp)
 			free(tmp);
 		word = word -> next;

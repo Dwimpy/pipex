@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/robu/projects/pipex",
-      "program": "/home/robu/projects/pipex/build/Release/outRelease",
+      "program": "/home/robu/projects/pipex/pipex",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

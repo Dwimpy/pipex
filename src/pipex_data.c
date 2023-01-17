@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 18:38:11 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/17 02:53:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,26 @@ static char	**set_path_binaries(t_pipex_input *input)
 	char	**binaries;
 	char	**env_ptr;
 	char	*env_path;
+	int		i;
 
 	env_ptr = input->envp;
 	binaries = NULL;
 	env_path = NULL;
-	while (env_ptr != NULL)
+	i = 0;
+	while (env_ptr[i] != NULL)
 	{
-		if (!ft_strncmp("PATH=", *env_ptr, 5))
+		if (!ft_strncmp("PATH=", env_ptr[i], 5))
 		{
-			if (ft_strnstr(*env_ptr, "/bin", ft_strlen(*env_ptr)))
+			if (ft_strnstr(env_ptr[i], "/bin", ft_strlen(env_ptr[i])))
 			{
-				env_path = ft_strdup(*env_ptr);
+				env_path = ft_strdup(env_ptr[i]);
 				break ;
 			}
 		}
-		env_ptr++;
+		i++;
 	}
 	if (env_path)
-		binaries = ft_split(env_path + 5, ':');
+		binaries = ft_split((env_path + 5), ':');
 	free(env_path);
 	return (binaries);
 }
