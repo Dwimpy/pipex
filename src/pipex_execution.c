@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 20:14:29 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:03:38 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	ft_pipex_executor(t_pipex_command *commands, t_pipex_input *input, \
 void	create_pipeline(t_pipex_pipeline *pipeline, t_pipex_data *data)
 {
 	(*pipeline).child = 0;
-	(*pipeline).file_fd_input = open(data->input_file->filename, O_RDONLY);
-	(*pipeline).file_fd_output = open(data->output_file->filename, \
-									O_WRONLY | O_TRUNC);
+	(*pipeline).pid = -1;
 	(*pipeline).pipe = create_pipes(data->command_number);
 }
 
@@ -51,7 +49,10 @@ static void	set_execution_parameters(t_pipex_execution *executor, \
 								t_pipex_command command, char **envp)
 {
 	executor->envp = envp;
-	executor->command_path = command.file->filepath;
+	if (command.file)
+		executor->command_path = command.file->filepath;
+	else
+		executor->command_path = NULL;
 	executor->cmd_options = command.options;
 }
 
@@ -63,7 +64,17 @@ pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_redirect_pipes(&pipeline, data->command_number);
+		if (pipeline->child == 0 && check_input_file_access(data, err_handler) < 0)
+			exit(EXIT_FAILURE);
+		if (pipeline->child == data->command_number - 1 && \
+			check_output_file_access(data, err_handler) < 0)
+			exit(EXIT_FAILURE);
+		if (!executor->command_path)
+		{
+			print_command_not_found(err_handler, ECOMMAND_NOT_FOUND_MSG, executor->cmd_options[0]);
+			exit(ECOMMAND_NOT_FOUND);
+		}
+		ft_redirect_pipes(&pipeline, data, err_handler, data->command_number);
 		close_pipe_fds(&pipeline, data->command_number);
 		if (execve(executor->command_path, \
 				executor->cmd_options, executor->envp) == -1)

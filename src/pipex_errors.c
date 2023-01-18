@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:34:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 16:18:44 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:02:30 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ void	print_special_error(t_pipex_errors *err_handler, \
 {
 	err_handler->msg = str;
 	ft_putstr_fd("\033[0;91mError: \033[0;39m", 2);
+	ft_putstr_fd(err_handler->msg, 2);
+	ft_putstr_fd("\n",2 );
+}
+
+void	print_command_not_found(t_pipex_errors *err_handler, \
+								char *str, char *command)
+{
+	err_handler->msg = str;
+	ft_putstr_fd("\033[0;91mError: \033[0;39m", 2);
+	ft_putstr_fd(command, 2);
+	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(err_handler->msg, 2);
 	ft_putstr_fd("\n",2 );
 }

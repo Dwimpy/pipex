@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 20:09:13 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 13:48:00 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_redirect_io(int input, int output)
 	return (0);
 }
 
-int	ft_redirect_pipes(t_pipex_pipeline **pipeline, int command_number)
+int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
+					t_pipex_errors *err_handler, int command_number)
 {
 	int				is_success;
 	int				fd;
@@ -34,11 +35,17 @@ int	ft_redirect_pipes(t_pipex_pipeline **pipeline, int command_number)
 	pipes = (*pipeline)->pipe;
 	is_success = 0;
 	if (child == 0)
+	{
+		(*pipeline)->file_fd_input = open(data->input_file->filename, O_RDONLY);
 		is_success = ft_redirect_io((**pipeline).file_fd_input, \
 									pipes[child].fd[WRITE_END]);
+	}
 	else if (child == command_number - 1)
+	{
+		(*pipeline)->file_fd_output = open(data->output_file->filename, O_WRONLY);
 		is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
 									(**pipeline).file_fd_output);
+	}
 	else
 		is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
 									pipes[child].fd[WRITE_END]);
@@ -79,6 +86,8 @@ void	close_pipe_fds(t_pipex_pipeline **pipeline, int pipe_number)
 	int	i;
 
 	i = -1;
+	close((**pipeline).file_fd_input);
+	close((**pipeline).file_fd_output);
 	while (++i < pipe_number)
 	{
 		close((*pipeline)->pipe[i].fd[READ_END]);

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 13:04:27 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:28:13 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 	scanner = scan_input(pipex_input, pipex_data);
 	fsm_results = get_fsm_results(scanner);
 	parse_nodes(fsm_results, scanner->size);
-	//display_result_values(fsm_results[0]);
+	//display_result_values(fsm_results[1]);
 	commands = create_commands(fsm_results, pipex_data, scanner->size);
 	ft_free_results(fsm_results, scanner->size);
 	ft_free_scanner(scanner);
@@ -65,9 +65,18 @@ static t_pipex_command	*create_commands(t_fsm_results **result, \
 	commands = initialize_commands(size);
 	while (i < size)
 	{
-		commands[i].cmd = ft_strdup(result[i]->front->word);
-		commands[i].options = get_command_option(result[i]);
-		commands[i].file = get_command_path(commands[i].cmd, data->binaries);
+		if (access(result[i]->front->word, F_OK) == 0)
+		{
+			commands[i].cmd = ft_strdup(ft_strrchr(result[i]->front->word, '/') + 1);
+			commands[i].options = get_command_option(result[i]);
+			commands[i].file = new_pipex_exe_file(ft_strrchr(result[i]->front->word, '/') + 1, result[i]->front->word);
+		}
+		else
+		{
+			commands[i].cmd = ft_strdup(result[i]->front->word);
+			commands[i].options = get_command_option(result[i]);
+			commands[i].file = get_command_path(commands[i].cmd, data->binaries);
+		}
 		i++;
 	}
 	i = 0;
@@ -87,7 +96,10 @@ static char	**get_command_option(t_fsm_results *result)
 	i = 0;
 	while (i < result->size)
 	{
-		trimmed_option = ft_strtrim(word->word, " \t\r\v\f\n");
+		if (access(word->word, F_OK) == 0)
+			trimmed_option = ft_strtrim(ft_strrchr(word->word, '/') + 1, " \t\r\v\f\n");
+		else
+			trimmed_option = ft_strtrim(word->word, " \t\r\v\f\n");
 		options[i] = ft_strdup(trimmed_option);
 		word = word->next;
 		i++;
