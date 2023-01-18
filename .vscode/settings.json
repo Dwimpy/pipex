@@ -64,6 +64,7 @@
 	"pipex_commands.h": "c",
 	"pipex_pipes.h": "c",
 	"pipex_execution.h": "c",
-	"__locale": "c"
+	"__locale": "c",
+	"get_next_line.h": "c"
 }
 }

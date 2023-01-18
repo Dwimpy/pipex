@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:09:31 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 12:31:59 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 17:53:08 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	fsm_do_nothing(t_word_tracker *tracker, t_state_machine *fsm)
 static void fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
 								t_word_tracker *word, char c)
 {
-	if (*(word->ptr) == c)
+	if (*(word->ptr) == c && *(word->ptr - 1) != '\\')
 	{
 		enqueue(result, ft_substr(word->word_start, \
 							1, word->ptr - word->word_start - 1));

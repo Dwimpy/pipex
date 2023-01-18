@@ -1,5 +1,0 @@
-cat
-/usr/bin/
-
-NULL
-

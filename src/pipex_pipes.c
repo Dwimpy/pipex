@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 13:48:00 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/18 20:53:36 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
 	}
 	else if (child == command_number - 1)
 	{
-		(*pipeline)->file_fd_output = open(data->output_file->filename, O_WRONLY);
+		(*pipeline)->file_fd_output = \
+			open(data->output_file->filename, O_WRONLY);
 		is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
 									(**pipeline).file_fd_output);
 	}
