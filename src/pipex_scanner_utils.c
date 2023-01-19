@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:08:44 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/11 15:26:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:23:34 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	fix_whitespace_helper(int *has_whitespace, \
 
 void	ft_free_scanner(t_pipex_scanner *scanner)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < scanner->size)

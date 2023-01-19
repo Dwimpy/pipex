@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:37:57 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 13:18:47 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:15:59 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ typedef struct s_pipex_pipeline
 
 t_pipex_pipes	*create_pipes(int pipes_number);
 
-int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
-					t_pipex_errors *err_handler, int command_number);
+int				ft_redirect_pipes(t_pipex_pipeline **pipeline, \
+									t_pipex_data *data, \
+									t_pipex_errors *err_handler, \
+									int command_number);
 int				ft_redirect_io(int input, int output);
 void			close_pipe_fds_parent(t_pipex_pipeline *pipeline, \
 										int pipe_number);

@@ -6,16 +6,16 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:04:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 13:51:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:16:45 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_PARSER_H
 # define PIPEX_PARSER_H
 
-#include "../libft/include/ft_printf.h"
-#include "../include/pipex_scanner.h"
-#include "../include/pipex_states.h"
+# include "../libft/include/ft_printf.h"
+# include "../include/pipex_scanner.h"
+# include "../include/pipex_states.h"
 
 typedef struct s_fsm_results_node	t_fsm_results_node;
 

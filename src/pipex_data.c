@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 22:29:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 01:45:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,9 @@ static char	*set_limiter(char **argv, int here_doc)
 static char	**set_path_binaries(t_pipex_input *input)
 {
 	char	**binaries;
-	char	**env_ptr;
 	char	*env_path;
 	int		i;
 
-	env_ptr = input->envp;
 	binaries = NULL;
 	env_path = NULL;
 	i = 0;
@@ -83,8 +81,7 @@ static char	**set_path_binaries(t_pipex_input *input)
 		}
 		i++;
 	}
-	if (env_path)
-		binaries = ft_split((env_path + 5), ':');
+	binaries = ft_split((env_path + 5), ':');
 	free(env_path);
 	return (binaries);
 }

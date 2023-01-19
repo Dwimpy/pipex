@@ -6,16 +6,18 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 22:55:11 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:28:21 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/pipex_execution.h"
 #include <sys/wait.h>
 
 static void	set_execution_parameters(t_pipex_execution *executor, \
 						t_pipex_command command, char **envp);
+static void	child_error_checker(t_pipex_execution *executor, \
+							t_pipex_errors *err_handler, \
+							t_pipex_pipeline *pipeline, t_pipex_data *data);
 
 void	ft_pipex_executor(t_pipex_command *commands, t_pipex_input *input, \
 						t_pipex_data *pipex_data, t_pipex_errors *err_handler)
@@ -53,7 +55,6 @@ static void	set_execution_parameters(t_pipex_execution *executor, \
 		executor->command_path = command.file->filepath;
 	else
 		executor->command_path = NULL;
-	ft_printf("%s\n", executor->command_path);
 	executor->cmd_options = command.options;
 }
 
@@ -63,26 +64,14 @@ pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
 	pid_t	pid;
 
 	pid = fork();
+	if (pid < 0)
+		print_errno_message(err_handler, "Fork: ");
 	if (pid == 0)
 	{
-		if (pipeline->child == 0 && \
-			check_input_file_access(data, err_handler) < 0)
-			exit(EXIT_FAILURE);
-		if (pipeline->child == data->command_number - 1 && \
-			check_output_file_access(data, err_handler) < 0)
-			exit(EXIT_FAILURE);
-		if (!executor->command_path)
-		{
-			print_command_not_found(err_handler, \
-					ECOMMAND_NOT_FOUND_MSG, executor->cmd_options[0]);
-			exit(ECOMMAND_NOT_FOUND);
-		}
-		if (check_exe_file_access(executor->command_path) < 0)
-		{
-			print_special_error(err_handler, ERR_EACCESS, "Access: ");
-			exit(ECOMMAND_EX_PERISSION);
-		}
-		ft_redirect_pipes(&pipeline, data, err_handler, data->command_number);
+		child_error_checker(executor, err_handler, pipeline, data);
+		if (ft_redirect_pipes(&pipeline, data, \
+			err_handler, data->command_number) == -1)
+			print_errno_message(err_handler, "Redirection: ");
 		close_pipe_fds(&pipeline, data->command_number);
 		if (execve(executor->command_path, \
 				executor->cmd_options, executor->envp) == -1)
@@ -91,4 +80,27 @@ pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
 		}
 	}
 	return (pid);
+}
+
+static void	child_error_checker(t_pipex_execution *executor, \
+							t_pipex_errors *err_handler, \
+							t_pipex_pipeline *pipeline, t_pipex_data *data)
+{
+	if (pipeline->child == 0 && \
+		check_input_file_access(data, err_handler) < 0)
+		exit(EXIT_FAILURE);
+	if (pipeline->child == data->command_number - 1 && \
+		check_output_file_access(data, err_handler) < 0)
+		exit(EXIT_FAILURE);
+	if (!executor->command_path)
+	{
+		print_command_not_found(err_handler, \
+				ECOMMAND_NOT_FOUND_MSG, executor->cmd_options[0]);
+		exit(ECOMMAND_NOT_FOUND);
+	}
+	if (check_exe_file_access(executor->command_path) < 0)
+	{
+		print_special_error(err_handler, ERR_EACCESS, "Access: ");
+		exit(ECOMMAND_EX_PERISSION);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:34:48 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 20:56:26 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:30:06 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,6 @@ void	exit_with_err_status_custom(t_pipex_errors *err_handler, \
 	print_special_error(err_handler, str, err_type);
 	ft_free_on_error(err_handler);
 	exit(err_handler->status);
-}
-
-void	print_errno_message(t_pipex_errors *err_handler, char *error_type)
-{
-	err_handler->msg = strerror(errno);
-	ft_putstr_fd("pipex: ", 2);
-	ft_putstr_fd(error_type, 2);
-	ft_putstr_fd(err_handler->msg, 2);
-	ft_putstr_fd("\n",2 );
-}
-
-void	print_special_error(t_pipex_errors *err_handler, \
-							char *str, char *error_type)
-{
-	err_handler->msg = str;
-	ft_putstr_fd("pipex: ", 2);
-	ft_putstr_fd(error_type, 2);
-	ft_putstr_fd(err_handler->msg, 2);
-	ft_putstr_fd("\n",2 );
-}
-
-void	print_command_not_found(t_pipex_errors *err_handler, \
-								char *str, char *command)
-{
-	err_handler->msg = str;
-	//ft_putstr_fd("\033[0;91mError: \033[0;39m", 2);
-	ft_putstr_fd("pipex: ", 2);
-	ft_putstr_fd(command, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(err_handler->msg, 2);
-	ft_putstr_fd("\n",2 );
 }
 
 void	ft_free_on_error(t_pipex_errors *err_handler)

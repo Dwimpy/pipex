@@ -6,15 +6,15 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:23:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 15:14:40 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:16:52 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_FILE_H
 # define PIPEX_FILE_H
 
-#include <fcntl.h>
-#include <stdlib.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 typedef enum e_file_type
 {

@@ -6,17 +6,19 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:09:31 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 17:53:08 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:29:05 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_parser.h"
 
-static void fsm_do_nothing(t_word_tracker *tracker, t_state_machine *fsm);
-static void fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
+static void	fsm_do_nothing(t_word_tracker *tracker, t_state_machine *fsm);
+static void	fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
 								t_word_tracker *word, char c);
-static void fsm_do_regular_state(t_fsm_results *result, t_state_machine *fsm, \
+static void	fsm_do_regular_state(t_fsm_results *result, t_state_machine *fsm, \
 								t_word_tracker *word, size_t *is_end);
+static void	fsm_finish(t_state_machine fsm, t_fsm_results *fsm_result, \
+						t_word_tracker *word);
 
 t_fsm_results	*fsm_run(t_pipex_scanner_results *result)
 {
@@ -41,11 +43,7 @@ t_fsm_results	*fsm_run(t_pipex_scanner_results *result)
 			fsm_do_quote_state(fsm_result, &fsm, &word, '\"');
 		(word.ptr)++;
 	}
-	if (fsm.e_state != NOTHING)
-	{
-		enqueue(fsm_result, ft_substr(word.word_start, \
-				0, word.ptr - word.word_start));
-	}
+	fsm_finish(fsm, fsm_result, &word);
 	free(fsm.states);
 	return (fsm_result);
 }
@@ -57,10 +55,10 @@ static void	fsm_do_nothing(t_word_tracker *tracker, t_state_machine *fsm)
 	else if (*(tracker->ptr) == '\"')
 		fsm_quotes_update_state(tracker, IN_DOUBLE_QUOTE, '\"', fsm);
 	else
-		fsm_regular_update_state(tracker, REGULAR, fsm);	
+		fsm_regular_update_state(tracker, REGULAR, fsm);
 }
 
-static void fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
+static void	fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
 								t_word_tracker *word, char c)
 {
 	if (*(word->ptr) == c && *(word->ptr - 1) != '\\')
@@ -72,10 +70,11 @@ static void fsm_do_quote_state(t_fsm_results *result, t_state_machine *fsm, \
 	}
 }
 
-static void fsm_do_regular_state(t_fsm_results *result, t_state_machine *fsm, \
+static void	fsm_do_regular_state(t_fsm_results *result, t_state_machine *fsm, \
 								t_word_tracker *word, size_t *is_end)
 {
-	if (ft_isspace3(*word->ptr) || *(word->ptr + 1) == '\0')
+	if ((ft_isspace3(*word->ptr) && *(word->ptr - 1) != '\\') \
+		|| *(word->ptr + 1) == '\0')
 	{
 		if (*(word->ptr + 1) == '\0')
 			*is_end = 1;
@@ -83,4 +82,12 @@ static void fsm_do_regular_state(t_fsm_results *result, t_state_machine *fsm, \
 						0, word->ptr - word->word_start + *is_end));
 		fsm->e_state = NOTHING;
 	}
+}
+
+static void	fsm_finish(t_state_machine fsm, t_fsm_results *fsm_result, \
+						t_word_tracker *word)
+{
+	if (fsm.e_state != NOTHING)
+		enqueue(fsm_result, ft_substr(word->word_start, \
+				0, word->ptr - word->word_start));
 }

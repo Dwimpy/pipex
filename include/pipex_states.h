@@ -6,14 +6,14 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:15:27 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 15:15:30 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:16:21 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_STATES_H
 # define PIPEX_STATES_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 typedef struct s_snode	t_snode;
 

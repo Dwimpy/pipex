@@ -6,15 +6,16 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:25:15 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/14 16:16:00 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 03:16:36 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_SCANNER_H
 # define PIPEX_SCANNER_H
 
-#include <stdlib.h>
-#include "../libft/include/ft_printf.h"
+# include <stdlib.h>
+# include "../libft/include/ft_printf.h"
+
 typedef struct s_pipex_scanner_results
 {
 	char		*parsed_input;

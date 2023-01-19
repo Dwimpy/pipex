@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 15:15:47 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/16 15:16:03 by arobu            ###   ########.fr       */
+/*   Created: 2023/01/19 03:30:34 by arobu             #+#    #+#             */
+/*   Updated: 2023/01/19 03:30:44 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_states.h"
 #include "../libft/include/ft_printf.h"
 
-static t_snode	*new_state(char	c)
+static t_snode	*new_state(char c)
 {
 	t_snode	*node;
 
@@ -59,7 +59,7 @@ int	peek_state(t_fsm_stack *stack)
 	return ((unsigned char)stack->top->c);
 }
 
-void pop_state(t_fsm_stack *stack)
+void	pop_state(t_fsm_stack *stack)
 {
 	t_snode	*node;
 
