@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:28:21 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:03:55 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,21 @@ static void	child_error_checker(t_pipex_execution *executor, \
 							t_pipex_errors *err_handler, \
 							t_pipex_pipeline *pipeline, t_pipex_data *data)
 {
-	if (pipeline->child == 0 && \
-		check_input_file_access(data, err_handler) < 0)
-		exit(EXIT_FAILURE);
-	if (pipeline->child == data->command_number - 1 && \
-		check_output_file_access(data, err_handler) < 0)
-		exit(EXIT_FAILURE);
+	int	i;
+	int	status;
+
+	i = 0;
+	run_child_fd_checker(data, err_handler, pipeline);
 	if (!executor->command_path)
 	{
 		print_command_not_found(err_handler, \
 				ECOMMAND_NOT_FOUND_MSG, executor->cmd_options[0]);
 		exit(ECOMMAND_NOT_FOUND);
+	}
+	if (check_exe_file_exists(executor->command_path) < 0)
+	{
+		print_errno_message(err_handler, "Input: ");
+		exit(EXIT_FAILURE);
 	}
 	if (check_exe_file_access(executor->command_path) < 0)
 	{

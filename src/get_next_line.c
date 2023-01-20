@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:12:00 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/04 23:07:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/20 12:34:39 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*ft_update_leftover(char *left_over)
 	}
 	size = ft_strchr_gnl(left_over, GNL_LINEBREAK) - left_over + 1;
 	str_len = ft_strlen_gnl(ft_strchr_gnl(left_over, GNL_LINEBREAK));
-	left_over_str = ft_substr_gnl(left_over, size, str_len);
+	left_over_str = ft_substr_gnl(left_over, size, str_len - 1);
 	free(left_over);
 	return (left_over_str);
 }

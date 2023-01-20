@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:05:27 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 12:33:07 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_pipex_command	*get_pipex_commands(t_pipex_input *pipex_input, \
 	scanner = scan_input(pipex_input, pipex_data);
 	fsm_results = get_fsm_results(scanner);
 	parse_nodes(fsm_results, scanner->size);
-	display_result_values(fsm_results[0]);
-	display_result_values(fsm_results[1]);
 	commands = create_commands(fsm_results, pipex_data, scanner->size);
 	ft_free_results(fsm_results, scanner->size);
 	ft_free_scanner(scanner);
@@ -64,7 +62,7 @@ static t_pipex_command	*create_commands(t_fsm_results **result, \
 	commands = initialize_commands(size);
 	while (i < size)
 	{
-		if (ft_strnstr(result[i]->front->word, ".sh", \
+		if (ft_strnstr(result[i]->front->word, "./", \
 			ft_strlen(result[i]->front->word)))
 			create_script_command(result, commands, data, i);
 		else if (access(result[i]->front->word, F_OK) == 0)

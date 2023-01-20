@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 03:42:31 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:06:36 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 11:37:58 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*create_access_option(t_fsm_results_node *word)
 	char				*options;
 	char				*trimmed_option;
 
-	if (ft_strrchr(word->word, '/'))
+	if (ft_strrchr(word->word, '/') && \
+		!ft_strnstr(word->word, ".sh", ft_strlen(word->word)))
 		trimmed_option = ft_strtrim(ft_strrchr(word->word, '/') + 1, " \t\r\v\f\n");
 	else
 		trimmed_option = ft_strtrim(word->word, " \r\t\v\f\n");

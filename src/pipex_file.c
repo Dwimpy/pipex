@@ -6,15 +6,14 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:24:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/18 21:56:43 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:05:16 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_file.h"
 #include "../include/pipex.h"
 
-t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename, \
-									t_pipex_errors *err_handler)
+t_pipex_file	*new_pipex_input_file(char *filename)
 {
 	t_pipex_file	*file;
 
@@ -27,8 +26,33 @@ t_pipex_file	*new_pipex_input_file(t_pipex_data *data, char *filename, \
 	return (file);
 }
 
-t_pipex_file	*new_pipex_output_file(t_pipex_data *data, char *filename, \
-									t_pipex_errors *err_handler)
+t_pipex_file	*new_pipex_heredoc_file(char *limiter)
+{
+	t_pipex_file	*heredoc;
+	char			*stdin_line;
+	int				fd;
+
+	fd = open("here_doc.tmp", O_RDWR | O_TRUNC | O_CREAT, 0644);
+	heredoc = new_pipex_input_file("here_doc.tmp");
+	while (1)
+	{
+		ft_putstr_fd("here_doc > ", 1);
+		stdin_line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(stdin_line, limiter, \
+			ft_strlen(stdin_line) - 1) == 0 && \
+			ft_strlen(limiter) == ft_strlen(stdin_line) - 1)
+		{
+			close(fd);
+			free(stdin_line);
+			break ;
+		}
+		ft_putstr_fd(stdin_line, fd);
+		free(stdin_line);
+	}
+	return (heredoc);
+}
+
+t_pipex_file	*new_pipex_output_file(char *filename)
 {
 	t_pipex_file	*file;
 

@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:04:55 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:16:45 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 11:53:48 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_fsm_state
 	NOTHING = 0,
 	REGULAR = 1,
 	IN_SINGLE_QUOTE = 2,
-	IN_DOUBLE_QUOTE = 3
+	IN_DOUBLE_QUOTE = 3,
+	IN_SCRIPT_STATE = 4
 }			t_fsm_states;
 
 typedef struct s_fsm_results_node
@@ -67,5 +68,11 @@ void					fsm_regular_update_state(t_word_tracker *tracker, \
 						t_fsm_states state, t_state_machine *fsm);
 void					fsm_quotes_update_state(t_word_tracker *tracker, \
 						t_fsm_states state, char c, t_state_machine *fsm);
-
+void					fsm_update_state_script(t_state_machine *fsm, \
+						t_word_tracker *word);
+void					fsm_do_script_state(t_fsm_results *result, \
+						t_state_machine *fsm, t_word_tracker *word);
+void					initialize_state_machine(t_word_tracker *word, \
+						t_fsm_results **result, t_state_machine *fsm, \
+						char *parsed_input);
 #endif

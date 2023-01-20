@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:07:31 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/19 18:40:19 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	pipex(int argc, char **argv, char **envp)
 	commands = get_pipex_commands(pipex_input, pipex_data);
 	ft_pipex_executor(commands, pipex_input, \
 					pipex_data, &err_handler);
+	if (pipex_data->here_doc == 1)
+		unlink(pipex_data->input_file->filename);
 	ft_free_commands(commands, pipex_data->command_number);
 	ft_free_pipex_memory(pipex_data, pipex_input);
 	exit(WEXITSTATUS(err_handler.pid_exit_code));

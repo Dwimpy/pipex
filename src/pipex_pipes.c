@@ -6,13 +6,20 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:07:38 by arobu            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:36:34 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_pipes.h"
 #include "../include/pipex.h"
 #include "../include/get_next_line.h"
+
+static int	redirect_first_child(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child);
+static int	redirect_other_children(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child);
+static int	redirect_last_child(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child);
 
 int	ft_redirect_io(int input, int output)
 {
@@ -35,63 +42,58 @@ int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
 	pipes = (*pipeline)->pipe;
 	is_success = 0;
 	if (child == 0)
-	{
-		(*pipeline)->file_fd_input = open(data->input_file->filename, O_RDONLY);
-		is_success = ft_redirect_io((**pipeline).file_fd_input, \
-									pipes[child].fd[WRITE_END]);
-	}
+		is_success = redirect_first_child(pipeline, data, child);
 	else if (child == command_number - 1)
-	{
-		(*pipeline)->file_fd_output = \
-			open(data->output_file->filename, O_WRONLY);
-		is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
-									(**pipeline).file_fd_output);
-	}
+		is_success = redirect_last_child(pipeline, data, child);
 	else
-		is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
-									pipes[child].fd[WRITE_END]);
+		is_success = redirect_other_children(pipeline, data, child);
 	return (is_success);
 }
 
-t_pipex_pipes	*create_pipes(int pipes_number)
+static int	redirect_first_child(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child)
 {
 	t_pipex_pipes	*pipes;
-	int				i;
+	int				is_success;
 
-	i = 0;
-	pipes = (t_pipex_pipes *)malloc(sizeof(t_pipex_pipes) * pipes_number);
-	if (!pipes)
-		return (NULL);
-	while (i < pipes_number)
-	{
-		pipe((pipes)[i].fd);
-		i++;
-	}
-	return (pipes);
+	pipes = (*pipeline)->pipe;
+	is_success = 0;
+	(*pipeline)->file_fd_input = open(data->input_file->filename, O_RDONLY);
+	is_success = ft_redirect_io((**pipeline).file_fd_input, \
+								pipes[child].fd[WRITE_END]);
+	close((*pipeline)->file_fd_input);
+	return (is_success);
 }
 
-void	close_pipe_fds_parent(t_pipex_pipeline *pipeline, int pipe_number)
+static int	redirect_last_child(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child)
 {
-	int	i;
+	t_pipex_pipes	*pipes;
+	int				is_success;
 
-	i = -1;
-	while (++i < pipe_number)
-	{
-		close((pipeline)->pipe[i].fd[READ_END]);
-		close((pipeline)->pipe[i].fd[WRITE_END]);
-	}
+	pipes = (*pipeline)->pipe;
+	is_success = 0;
+	if (data->here_doc == 0)
+		(*pipeline)->file_fd_output = \
+			open(data->output_file->filename, O_WRONLY, 0644);
+	else
+		(*pipeline)->file_fd_output = \
+			open(data->output_file->filename, O_WRONLY | O_APPEND, 0644);
+	is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
+								(**pipeline).file_fd_output);
+	close((*pipeline)->file_fd_output);
+	return (is_success);
 }
 
-void	close_pipe_fds(t_pipex_pipeline **pipeline, int pipe_number)
+static int	redirect_other_children(t_pipex_pipeline **pipeline, \
+						t_pipex_data *data, int child)
 {
-	int	i;
+	t_pipex_pipes	*pipes;
+	int				is_success;
 
-	i = -1;
-	close((**pipeline).file_fd_input);
-	close((**pipeline).file_fd_output);
-	while (++i < pipe_number)
-	{
-		close((*pipeline)->pipe[i].fd[READ_END]);
-		close((*pipeline)->pipe[i].fd[WRITE_END]);
-	}
+	pipes = (*pipeline)->pipe;
+	is_success = 0;
+	is_success = ft_redirect_io(pipes[child - 1].fd[READ_END], \
+							pipes[child].fd[WRITE_END]);
+	return (is_success);
 }
