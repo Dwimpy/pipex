@@ -6,7 +6,7 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/01/19 19:52:03 by arobu            ###   ########.fr        #
+#    Updated: 2023/02/24 21:35:49 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 
 NAME			= pipex
 INCLUDE			= -I include/
+DSYM			= $(NAME).dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
 LIBFT_FOLDER	= ./libft
@@ -73,6 +74,7 @@ show:
 
 fclean:		clean
 			@$(RM) -f $(NAME)
+			@$(RM) -rdf $(DSYM)
 			@echo "$(CYAN)Executables successfully cleaned!$(DEF_COLOR)"
 
 re:			fclean all		
