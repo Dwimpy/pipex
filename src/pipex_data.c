@@ -6,12 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 13:16:12 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:05:50 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:30:19 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
-#include "../include/pipex_file.h"
+#include "pipex.h"
+#include "pipex_file.h"
 
 static int	set_here_doc(t_pipex_input *input);
 static char	**set_path_binaries(t_pipex_input *input);

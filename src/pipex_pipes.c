@@ -6,13 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/02/25 13:58:02 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_pipes.h"
-#include "../include/pipex.h"
-#include "../include/get_next_line.h"
+#include "pipex_pipes.h"
+#include "pipex.h"
+#include "get_next_line.h"
 
 static int	redirect_first_child(t_pipex_pipeline **pipeline, \
 						t_pipex_data *data, int child);

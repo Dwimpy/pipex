@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/02/25 13:54:18 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_execution.h"
+#include "pipex_execution.h"
 #include <sys/wait.h>
 
 static void	set_execution_parameters(t_pipex_execution *executor, \

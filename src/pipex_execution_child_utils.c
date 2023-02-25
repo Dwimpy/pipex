@@ -6,12 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:28:10 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:06:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_pipes.h"
-#include "../include/pipex.h"
+#include "pipex_pipes.h"
+#include "pipex.h"
 
 void	run_child_fd_checker(t_pipex_data *data, t_pipex_errors *err_handler, \
 							t_pipex_pipeline *pipeline)

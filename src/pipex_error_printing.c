@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 03:29:45 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:06:33 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:30:22 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 void	print_errno_message(t_pipex_errors *err_handler, char *error_type)
 {

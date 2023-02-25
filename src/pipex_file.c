@@ -6,12 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 12:24:49 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:05:16 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_file.h"
-#include "../include/pipex.h"
+#include "pipex_file.h"
+#include "pipex.h"
 
 t_pipex_file	*new_pipex_input_file(char *filename)
 {

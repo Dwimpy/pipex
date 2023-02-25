@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:12:25 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 17:26:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_parser.h"
+#include "pipex_parser.h"
 
 void	fsm_quotes_update_state(t_word_tracker *tracker, \
 					t_fsm_states state, char c, t_state_machine *fsm)

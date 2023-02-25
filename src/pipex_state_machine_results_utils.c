@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:06:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:23:38 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_parser.h"
+#include "pipex_parser.h"
 
 void	display_result_values(t_fsm_results *results)
 {

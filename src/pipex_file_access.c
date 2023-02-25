@@ -6,13 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 18:07:47 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:06:44 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_file.h"
-#include "../include/pipex_pipes.h"
-#include "../include/pipex.h"
+#include "pipex_file.h"
+#include "pipex_pipes.h"
+#include "pipex.h"
 
 int	check_input_file_access(t_pipex_data *data, \
 							t_pipex_errors *err_handler)

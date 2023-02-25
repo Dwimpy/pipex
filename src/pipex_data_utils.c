@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:03:42 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/17 15:37:46 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:30:13 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 static void	ft_free_binaries(t_pipex_data *data);
 

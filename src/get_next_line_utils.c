@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:24:08 by arobu             #+#    #+#             */
-/*   Updated: 2022/12/04 23:10:37 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:29:48 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "get_next_line.h"
 
 char	*ft_strchr_gnl(const char *s, int c)
 {

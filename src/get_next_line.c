@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:12:00 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 12:34:39 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:29:51 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "get_next_line.h"
 
 void	create_node(t_gnl **node, int fd)
 {

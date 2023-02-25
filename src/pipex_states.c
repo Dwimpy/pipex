@@ -6,12 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 03:30:34 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:30:44 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:29:37 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_states.h"
-#include "../libft/include/ft_printf.h"
+#include "pipex_states.h"
+#include "ft_printf.h"
 
 static t_snode	*new_state(char c)
 {

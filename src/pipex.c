@@ -6,13 +6,13 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 19:32:53 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 18:40:19 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
-#include "../include/pipex_commands.h"
-#include "../include/pipex_execution.h"
+#include "pipex.h"
+#include "pipex_commands.h"
+#include "pipex_execution.h"
 
 void	ft_free_pipex_memory(t_pipex_data *data, t_pipex_input *input);
 

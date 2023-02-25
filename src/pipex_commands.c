@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/02/25 13:52:53 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:30:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_commands.h"
+#include "pipex_commands.h"
 
 static t_fsm_results	**get_fsm_results(t_pipex_scanner *scanner);
 static t_pipex_command	*create_commands(t_fsm_results **result, \

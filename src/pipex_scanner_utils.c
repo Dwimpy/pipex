@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:08:44 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:23:34 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_scanner.h"
+#include "pipex_scanner.h"
 
 t_pipex_scanner	*init_scanner(int here_doc, int argc, \
 							int *start_arg, int *end_arg)

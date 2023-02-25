@@ -6,25 +6,25 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/02/25 14:06:12 by arobu            ###   ########.fr        #
+#    Updated: 2023/02/25 14:34:27 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 
 NAME			= pipex
-INCLUDE			= -I ./include/ -I./libft/include/
+INCLUDE			= -I ./include/ -I./libft-printf/include/
 DSYM			= $(NAME).dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
-LIBFT_FOLDER	= ./libft
-LIBFT_LIB		= ./libft/libft.a
+LIBFT_FOLDER	= ./libft-printf
+LIBFT_LIB		= ./libft-printf/libft.a
 MAIN_FILE		= main.c
 # Compiler
 
 CC			= gcc
 CFLAGS		= -g3 -Wall -Werror -Wextra #-fsanitize=address -g3 #-Wall -Werror -Wextra 
-LDLFLAGS	= -L./libft/ -lft
+LDLFLAGS	= -L$(LIBFT_FOLDER) -lft
 
 #Archive and Remove
 
@@ -50,15 +50,15 @@ PIPEX_OBJS	= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(PIPEX_SRCS))
 all:	libft	$(NAME)
 
 $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)
+	@$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)
 	@echo "$(CYAN)Pipex built successfully.$(DEF_COLOR)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@ echo "$(MAGENTA) Compiling file $<.$(DEF_COLOR)"
+	@ echo "$(MAGENTA) Compiling: $(DEF_COLOR) $<."
 	@ $(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 libft:
 			@make all -C $(LIBFT_FOLDER) -s

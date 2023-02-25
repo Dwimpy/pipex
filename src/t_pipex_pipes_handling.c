@@ -6,12 +6,12 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:19:36 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:20:32 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:31:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex_pipes.h"
-#include "../include/pipex.h"
+#include "pipex_pipes.h"
+#include "pipex.h"
 
 t_pipex_pipes	*create_pipes(int pipes_number)
 {
