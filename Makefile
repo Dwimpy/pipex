@@ -6,25 +6,27 @@
 #    By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 14:38:01 by arobu             #+#    #+#              #
-#    Updated: 2023/02/25 14:34:27 by arobu            ###   ########.fr        #
+#    Updated: 2023/02/25 17:51:52 by arobu            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables
 
 NAME			= pipex
-INCLUDE			= -I ./include/ -I./libft-printf/include/
+INCLUDE			= -I ./include/ -I./libft-printf/include/ -I./get_next_line/gnl/include
 DSYM			= $(NAME).dSYM
 SRC_DIR			= ./src
 OBJ_DIR			= ./obj
 LIBFT_FOLDER	= ./libft-printf
 LIBFT_LIB		= ./libft-printf/libft.a
+GNL_LIB			= ./get_next_line/gnl.a
 MAIN_FILE		= main.c
+GNL_FOLDER		= ./get_next_line
 # Compiler
 
 CC			= gcc
 CFLAGS		= -g3 -Wall -Werror -Wextra #-fsanitize=address -g3 #-Wall -Werror -Wextra 
-LDLFLAGS	= -L$(LIBFT_FOLDER) -lft
+LDLFLAGS	= -L$(LIBFT_FOLDER) -lft -L$(GNL_FOLDER) -lgnl
 
 #Archive and Remove
 
@@ -47,7 +49,7 @@ WHITE = \033[0;97m
 PIPEX_SRCS	=	$(wildcard $(SRC_DIR)/*.c)
 PIPEX_OBJS	= 	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(PIPEX_SRCS))
 
-all:	libft	$(NAME)
+all:	gnl	libft	$(NAME)
 
 $(NAME): $(PIPEX_OBJS) | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(PIPEX_OBJS) $(MAIN_FILE) $(LDLFLAGS)
@@ -60,6 +62,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+gnl:
+	@make -C $(GNL_FOLDER)
+
 libft:
 			@make all -C $(LIBFT_FOLDER) -s
 
@@ -70,6 +75,7 @@ libft:
 
 fclean:		clean
 			@make fclean -C $(LIBFT_FOLDER)
+			@make fclean -C $(GNL_FOLDER)
 			@$(RM) -f $(NAME)
 			@echo "$(YELLOW)All$(DEF_COLOR) $(CYAN)objects successfully cleaned!$(DEF_COLOR)"
 
