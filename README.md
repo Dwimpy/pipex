@@ -19,8 +19,11 @@ Compilation
   make
 ```
 
-Paco Results
+Francinette Results
 -------------------
+>[Francinette Tester for 42 Students](https://github.com/xicodomingues/francinette) \
+> Follow the instructions in the aforementioned link to install the tester
+
 ![Paco Tester](https://i.imgur.com/T59gYH5.png)
 
 Usage
