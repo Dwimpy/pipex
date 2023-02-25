@@ -69,3 +69,9 @@ Should behave like:
 ```bash
 cmd << LIMITER | cmd1 >> file
 ```
+## Warning Against Blindly Copying Code
+> Copying code without understanding it is not a good practice. While it may help you pass a project or assignment, \
+it won't help you learn and grow as a programmer. It's important to take the time to understand the code you're working \
+with, as it will help you catch errors, make improvements, and build better solutions in the future. Additionally, copying \
+code without attribution or permission can be a violation of academic integrity and may result in penalties. \
+So, take the time to learn and understand the code you're working with, and use it as a starting point to build your own solutions.
