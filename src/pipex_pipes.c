@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:40:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:36:34 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:58:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 static int	redirect_first_child(t_pipex_pipeline **pipeline, \
 						t_pipex_data *data, int child);
-static int	redirect_other_children(t_pipex_pipeline **pipeline, \
-						t_pipex_data *data, int child);
+static int	redirect_other_children(t_pipex_pipeline **pipeline, int child);
 static int	redirect_last_child(t_pipex_pipeline **pipeline, \
 						t_pipex_data *data, int child);
 
@@ -31,10 +30,9 @@ int	ft_redirect_io(int input, int output)
 }
 
 int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
-					t_pipex_errors *err_handler, int command_number)
+						int command_number)
 {
 	int				is_success;
-	int				fd;
 	int				child;
 	t_pipex_pipes	*pipes;
 
@@ -46,7 +44,7 @@ int	ft_redirect_pipes(t_pipex_pipeline **pipeline, t_pipex_data *data, \
 	else if (child == command_number - 1)
 		is_success = redirect_last_child(pipeline, data, child);
 	else
-		is_success = redirect_other_children(pipeline, data, child);
+		is_success = redirect_other_children(pipeline, child);
 	return (is_success);
 }
 
@@ -85,8 +83,7 @@ static int	redirect_last_child(t_pipex_pipeline **pipeline, \
 	return (is_success);
 }
 
-static int	redirect_other_children(t_pipex_pipeline **pipeline, \
-						t_pipex_data *data, int child)
+static int	redirect_other_children(t_pipex_pipeline **pipeline, int child)
 {
 	t_pipex_pipes	*pipes;
 	int				is_success;

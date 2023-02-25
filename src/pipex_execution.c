@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:54:30 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:03:55 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:54:18 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_pipex_executor(t_pipex_command *commands, t_pipex_input *input, \
 {
 	t_pipex_execution	pipex_executor;
 	t_pipex_pipeline	pipeline;
-	pid_t				status;
 
 	create_pipeline(&pipeline, pipex_data);
 	while (pipeline.child < pipex_data->command_number)
@@ -69,8 +68,7 @@ pid_t	fork_command(t_pipex_execution *executor, t_pipex_errors *err_handler, \
 	if (pid == 0)
 	{
 		child_error_checker(executor, err_handler, pipeline, data);
-		if (ft_redirect_pipes(&pipeline, data, \
-			err_handler, data->command_number) == -1)
+		if (ft_redirect_pipes(&pipeline, data, data->command_number) == -1)
 			print_errno_message(err_handler, "Redirection: ");
 		close_pipe_fds(&pipeline, data->command_number);
 		if (execve(executor->command_path, \
@@ -87,7 +85,6 @@ static void	child_error_checker(t_pipex_execution *executor, \
 							t_pipex_pipeline *pipeline, t_pipex_data *data)
 {
 	int	i;
-	int	status;
 
 	i = 0;
 	run_child_fd_checker(data, err_handler, pipeline);

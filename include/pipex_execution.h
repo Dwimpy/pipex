@@ -6,14 +6,14 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:26:47 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 15:03:46 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 14:00:09 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_EXECUTION_H
 # define PIPEX_EXECUTION_H
-# include "../include/pipex_pipes.h"
-# include "../include/pipex_commands.h"
+# include "pipex_pipes.h"
+# include "pipex_commands.h"
 # include <errno.h>
 # include <string.h>
 

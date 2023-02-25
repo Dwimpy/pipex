@@ -6,14 +6,14 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:11:23 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 04:04:24 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:59:58 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_COMMANDS_H
 # define PIPEX_COMMANDS_H
 
-# include "../include/pipex.h"
+# include "pipex.h"
 
 typedef struct s_pipex_command
 {
@@ -28,8 +28,7 @@ t_pipex_command	*initialize_commands(int size);
 t_pipex_file	*get_command_path(char *cmd, char **binaries);
 
 void			create_script_command(t_fsm_results **result, \
-										t_pipex_command *commands, \
-										t_pipex_data *data, int i);
+										t_pipex_command *commands, int i);
 void			create_access_command(t_fsm_results **result, \
 										t_pipex_command *commands, \
 										t_pipex_data *data, int i);

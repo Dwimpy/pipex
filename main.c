@@ -6,11 +6,11 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:56:29 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/20 13:12:59 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:59:02 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "pipex.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {	

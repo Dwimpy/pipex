@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:49:37 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 12:33:07 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:52:53 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_pipex_command	*create_commands(t_fsm_results **result, \
 	{
 		if (ft_strnstr(result[i]->front->word, "./", \
 			ft_strlen(result[i]->front->word)))
-			create_script_command(result, commands, data, i);
+			create_script_command(result, commands, i);
 		else if (access(result[i]->front->word, F_OK) == 0)
 			create_access_command(result, commands, data, i);
 		else

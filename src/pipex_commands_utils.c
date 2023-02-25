@@ -6,7 +6,7 @@
 /*   By: arobu <arobu@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 20:52:17 by arobu             #+#    #+#             */
-/*   Updated: 2023/01/19 03:17:11 by arobu            ###   ########.fr       */
+/*   Updated: 2023/02/25 13:53:23 by arobu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	parse_nodes(t_fsm_results **result, int size)
 {
 	int					i;
-	int					j;
 	t_fsm_results_node	*word;
 
 	i = 0;
@@ -52,8 +51,8 @@ t_pipex_command	*initialize_commands(int size)
 
 void	parse_escape(char **str)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*str_cpy;
 
 	i = 0;
